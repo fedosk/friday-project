@@ -1,0 +1,25 @@
+.default {
+
+}
+
+.red {
+    background: red;
+}
+
+.btn {
+    height: 46px;
+    appearance: none;
+    border: 0;
+    border-radius: 8px;
+    background: #4F5673;
+    color: #fff;
+    padding: 0 16px;
+    font-size: 16px;
+    margin: 0 5px 0 5px;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: rgba(79, 86, 115, 0.87);
+    transition: 0.3s;
+}

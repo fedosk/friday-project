@@ -1,0 +1,19 @@
+.list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.item + .item {
+    margin-left: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #282c34;
+}
+
+a:hover {
+    color: #6287cc;
+}
+

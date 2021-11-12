@@ -1,0 +1,23 @@
+.superInput {
+
+}
+
+.errorInput {
+    border: 3px solid rgba(128, 128, 128, 0.74);
+    background: rgba(128, 128, 128, 0.3);
+}
+
+.error {
+    color: red;
+    font-size: 30px;
+}
+
+.inputStyle {
+    outline: none;
+    width: 400px;
+    height: 50px;
+    border-radius: 8px;
+    font-size: 20px;
+    padding: 7px;
+}
+
