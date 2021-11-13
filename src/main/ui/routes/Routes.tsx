@@ -1,19 +1,19 @@
 import React from 'react';
 import {Route, Routes} from "react-router-dom";
-import {Register} from "../../../features/feature1-auth/register/Register";
-import {Profile} from "../../../features/feature1-auth/profile/Profile";
-import {PasswordRecovery} from "../../../features/feature1-auth/password-recovery/PasswordRecovery";
-import {NewPassword} from "../../../features/feature1-auth/new-password/NewPassword";
-import {Login} from "../../../features/feature1-auth/login/Login";
+import {Register} from "../../../features/feature1-auth/Register/Register";
+import {Profile} from "../../../features/feature1-auth/Profile/Profile";
+import {PasswordRecovery} from "../../../features/feature1-auth/Password-recovery/PasswordRecovery";
+import {NewPassword} from "../../../features/feature1-auth/New-password/NewPassword";
+import {Login} from "../../../features/feature1-auth/Login/Login";
 import {Error404} from "../../../features/feature1-auth/Error404/Error404";
 import {SuperComponents} from "../common/HW4";
 
 export const PATH = {
-    LOGIN: '/login',
-    NEW_PASSWORD: '/new-password',
-    PASSWORD_RECOVERY: '/password-recovery',
-    PROFILE: '/profile',
-    REGISTER: '/register',
+    LOGIN: '/Login',
+    NEW_PASSWORD: '/New-password',
+    PASSWORD_RECOVERY: '/Password-recovery',
+    PROFILE: '/Profile',
+    REGISTER: '/Register',
     SUPER_COMPONENTS: '/super-components',
 }
 
