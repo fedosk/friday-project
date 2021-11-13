@@ -1,25 +1,31 @@
 .default {
-
-}
-
-.red {
-    background: red;
+    font-weight: bold;
+    background-color: #F9F9FE;
+    position: relative;
+    width: 100px;
+    padding: 5px;
 }
 
 .btn {
-    height: 46px;
+    height: 36px;
     appearance: none;
     border: 0;
-    border-radius: 8px;
-    background: #4F5673;
-    color: #fff;
-    padding: 0 16px;
-    font-size: 16px;
+    font-weight: bold;
     margin: 0 5px 0 5px;
+    transition: 0.2s;
+    border-radius: 30px;
+    padding: 5px;
+}
+
+.blueButton {
+    box-shadow: 0 4px 18px rgba(33, 38, 143, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background-color: rgb(33, 38, 143);
+    color: #F9F9FE;
+}
+
+.blueButton:hover {
+    background-color: rgba(33, 38, 143, 0.7);
     transition: 0.2s;
 }
 
-.btn:hover {
-    background: rgba(79, 86, 115, 0.87);
-    transition: 0.3s;
-}
+

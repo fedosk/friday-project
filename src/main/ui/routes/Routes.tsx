@@ -20,7 +20,7 @@ export const PATH = {
 
 export function Rout() {
     return (
-        <div className={'header'}>
+        <div className={'Routes'}>
             <Routes>
                 <Route path={PATH.LOGIN} element={<Login/>}/>
                 <Route path={PATH.NEW_PASSWORD} element={<NewPassword/>}/>

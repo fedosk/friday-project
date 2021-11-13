@@ -1,0 +1,50 @@
+.loginWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 60px);
+}
+
+.loginWindow {
+    height: 600px;
+    width: 413px;
+    border-radius: 8px;
+    background-color: #F9F9FE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    margin-top: 40px;
+}
+
+.signIn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    margin-top: 32px;
+}
+
+.emailWrapper {
+    margin-top: 38px;
+}
+
+.passwordWrapper {
+    margin-top: 24px;
+}
+
+.forgotPasswordBtn {
+    margin: 48px 5px 0 0;
+    display: flex;
+    align-self: flex-end;
+}
+
+.loginBtn {
+    margin: 92px 0 31px;
+}
+
+.signUpBtn {
+    margin-top: 11px;
+}

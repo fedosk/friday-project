@@ -10,9 +10,7 @@ export function Header() {
             <div className='container'>
                 <ul className={styles.list}>
                     <li className={styles.item}>
-                        <NavLink to={PATH.PROFILE}>
-                            <h1 className={styles.logo}>It-incubator</h1>
-                        </NavLink>
+                        <NavLink to={PATH.LOGIN}><h1 className={styles.logo}>It-incubator</h1></NavLink>
                     </li>
                     <li className={styles.item}>
                         <NavLink to={PATH.LOGIN}>LOGIN</NavLink>
