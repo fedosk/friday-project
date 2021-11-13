@@ -8,6 +8,7 @@ import {Login} from "../../../features/feature1-auth/Login/Login";
 import {Error404} from "../../../features/feature1-auth/Error404/Error404";
 import {SuperComponents} from "../common/HW4";
 
+
 export const PATH = {
     LOGIN: '/Login',
     NEW_PASSWORD: '/New-password',

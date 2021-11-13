@@ -4,8 +4,9 @@ import styles from './Login.module.css'
 
 export function Login() {
   return (
-    <div className={styles.error}>
-      Login
+    <div className={styles.container}>
+
+
     </div>
   );
 }
