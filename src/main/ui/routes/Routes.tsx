@@ -1,12 +1,13 @@
 import React from 'react';
 import {Route, Routes} from "react-router-dom";
-import {Register} from "../../../features/feature1-auth/Register/Register";
-import {Profile} from "../../../features/feature1-auth/Profile/Profile";
-import {PasswordRecovery} from "../../../features/feature1-auth/Password-recovery/PasswordRecovery";
-import {NewPassword} from "../../../features/feature1-auth/New-password/NewPassword";
-import {Login} from "../../../features/feature1-auth/Login/Login";
+
 import {Error404} from "../../../features/feature1-auth/Error404/Error404";
 import {SuperComponents} from "../common/HW4";
+import {NewPassword} from "../../../features/feature1-auth/new-password/NewPassword";
+import {Register} from "../../../features/feature1-auth/register/Register";
+import {Login} from "../../../features/feature1-auth/login/Login";
+import {PasswordRecovery} from "../../../features/feature1-auth/password-recovery/PasswordRecovery";
+import {Profile} from "../../../features/feature1-auth/profile/Profile";
 
 
 export const PATH = {
