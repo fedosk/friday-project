@@ -1,0 +1,53 @@
+.checkEmail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 60px);
+}
+
+.checkEmailWindow {
+    width: 413px;
+    height: 540px;
+    border-radius: 8px;
+    background-color: #F9F9FE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    margin-top: 25px;
+}
+
+.checkEmailWrapper {
+    margin-top: 38px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.checkEmailImg {
+    width:108px;
+    height: 108px;
+}
+.checkEmailWrapper h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    margin-top: 25px;
+}
+
+span {
+    width: 347px;
+    height: 48px;
+    font-family: SF UI Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2D2E46;
+    opacity: 0.5;
+}
