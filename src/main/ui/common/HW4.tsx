@@ -22,11 +22,10 @@ export function SuperComponents() {
 
     return (
         <div>
-            <hr/>
-            homeworks 4
-
             <div className={s.column}>
                 <SuperInputText
+                    formName={'Email'}
+                    type={'email'}
                     value={text}
                     onChangeText={setText}
                     onEnter={showAlert}
@@ -35,7 +34,7 @@ export function SuperComponents() {
                     inputStyle
                 />
 
-                <SuperInputText
+               {/* <SuperInputText
                     className={s.blue}
                 />
 
@@ -63,11 +62,8 @@ export function SuperComponents() {
                     some text
                 </SuperCheckbox>
 
-                <SuperCheckbox checked={checked} onChange={testOnChange}/>
+                <SuperCheckbox checked={checked} onChange={testOnChange}/>*/}
             </div>
-
-            <hr/>
-            <hr/>
         </div>
     )
 }

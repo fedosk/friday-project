@@ -8,6 +8,7 @@ import {Login} from "../../../features/feature1-auth/Login/Login";
 import {Error404} from "../../../features/feature1-auth/Error404/Error404";
 import {SuperComponents} from "../common/HW4";
 
+
 export const PATH = {
     LOGIN: '/Login',
     NEW_PASSWORD: '/New-password',
@@ -19,7 +20,7 @@ export const PATH = {
 
 export function Rout() {
     return (
-        <div className={'header'}>
+        <div className={'Routes'}>
             <Routes>
                 <Route path={PATH.LOGIN} element={<Login/>}/>
                 <Route path={PATH.NEW_PASSWORD} element={<NewPassword/>}/>

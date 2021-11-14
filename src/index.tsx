@@ -8,6 +8,7 @@ import {Provider} from "react-redux";
 import {store} from "./main/bll/store";
 
 
+//hello world
 ReactDOM.render(
     <React.StrictMode>
         <HashRouter>
