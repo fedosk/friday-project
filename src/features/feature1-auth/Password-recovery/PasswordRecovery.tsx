@@ -4,8 +4,8 @@ import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInput
 import s from "../../../main/ui/common/HW4.module.css";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
-import {sendInstructions, setEmail} from "./password-recovery-reduser";
 import {AppRootStateType} from "../../../main/bll/store";
+import {sendInstructions, setEmail} from "./password-recovery-reduser";
 
 
 export function PasswordRecovery() {

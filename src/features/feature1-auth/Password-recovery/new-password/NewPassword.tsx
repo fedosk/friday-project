@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setNewPassword, setPassword} from "../password-recovery-reduser";
 
 
+
 export function NewPassword() {
     const password = useSelector((state: AppRootStateType) => state.passwordRecovery.password)
     const passwordError = password ? '' : 'password error'
@@ -18,9 +19,11 @@ export function NewPassword() {
     const onChangePassword = () => {
         dispatch(setPassword(password))
     }
+
     const onSetNewPassword = () => {
         dispatch(setNewPassword(token, password))
     }
+
     const showEmail = () => {
         if (passwordError) {
             alert('Неверный Адресс')
@@ -28,6 +31,7 @@ export function NewPassword() {
             alert(password)
         }
     }
+
     return (
         <div className='container'>
             <div className={styles.newPassword}>

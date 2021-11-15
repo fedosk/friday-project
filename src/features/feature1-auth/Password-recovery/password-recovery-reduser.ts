@@ -5,16 +5,16 @@ export const apiServices = axios.create({
     baseURL: `https://neko-back.herokuapp.com/2.0/`,
 });
 const apiRecoveryPassword = {
- getInstructions(email: string) {
-    return apiServices.post(`auth/forgot`, {
-        email, from: "test-front-admin <admin@gmail.com>",
-        message: `<div>Recovery Link:<a href="http://localhost:3000/#/New-password/$token$/">your-link<a/></div>`
-    })
-},
- setNewPassword(resetPasswordToken:string,password:string)  {
-    return apiServices.post(`auth/set-new-password` ,
-        {resetPasswordToken, password  })
-}
+    getInstructions(email: string) {
+        return apiServices.post(`auth/forgot`, {
+            email, from: "test-front-admin <admin@gmail.com>",
+            message: `<div>Recovery Link:<a href="http://localhost:3000/#/New-password/$token$/">your-link<a/></div>`
+        })
+    },
+    setNewPassword(resetPasswordToken: string, password: string) {
+        return apiServices.post(`auth/set-new-password`,
+            {resetPasswordToken, password})
+    }
 };
 
 const initialState = {
@@ -51,13 +51,13 @@ export const sendInstructions = (email: string) => {
         apiRecoveryPassword.getInstructions(email).then()
     }
 }
-export const setNewPassword =(token:string,password:string) => {
-    return (dispatch:Dispatch<ActionsType>) => {
-        apiRecoveryPassword.setNewPassword(token,password).then()
+export const setNewPassword = (token: string, password: string) => {
+    return (dispatch: Dispatch<ActionsType>) => {
+        apiRecoveryPassword.setNewPassword(token, password).then()
     }
 }
 // types
 type SetPassword = ReturnType<typeof setPassword>
 type SetEmailType = ReturnType<typeof setEmail>
-type ActionsType = any
+type ActionsType = SetPassword | SetEmailType
 
