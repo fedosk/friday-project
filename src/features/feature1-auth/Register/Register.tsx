@@ -14,7 +14,7 @@ export function Register() {
     const confirmError = confirmPassword ? '' : 'confirm password required'
 
     const showEmail = () => {
-        if (emailError.length) {
+        if (emailError) {
             alert('введите email...')
         } else {
             alert(email)
