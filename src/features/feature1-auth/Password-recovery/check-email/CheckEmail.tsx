@@ -1,9 +1,12 @@
 import React from 'react';
 import styles from './CheckEmail.module.css'
 import checkEmail from '../../../../main/ui/assets/img/icons/checkEmail.svg'
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../../../main/bll/store";
 
-export function CheckEmail() {
 
+export const CheckEmail = () => {
+    const email = useSelector((state: AppRootStateType) => state.passwordRecovery.email)
 
     return (
         <div className='container'>
@@ -16,7 +19,7 @@ export function CheckEmail() {
                         </div>
                         <h2>Check Email</h2>
                     </div>
-                    <span> We’ve sent an Email with instructions to example@mail.com</span>
+                    <span> We’ve sent an Email with instructions to {email}</span>
                 </div>
             </div>
         </div>
