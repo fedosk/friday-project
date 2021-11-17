@@ -13,7 +13,7 @@ import {CheckEmail} from "../../../features/feature1-auth/password-recovery/chec
 
 export const PATH = {
     LOGIN: '/Login',
-    NEW_PASSWORD: '/New-password',
+    NEW_PASSWORD: '/New-password/:token',
     PASSWORD_RECOVERY: '/Password-recovery',
     CHECK_EMAIL: '/Check-email',
     PROFILE: '/Profile',

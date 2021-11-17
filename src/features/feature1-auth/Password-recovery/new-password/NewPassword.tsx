@@ -3,31 +3,33 @@ import styles from './NewPassword.module.css'
 import SuperInputText from "../../../../main/ui/common/c1-SuperInputText/SuperInputText";
 import s from "../../../../main/ui/common/HW4.module.css";
 import SuperButton from "../../../../main/ui/common/c2-SuperButton/SuperButton";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {AppRootStateType} from "../../../../main/bll/store";
-import {useDispatch, useSelector} from "react-redux";
-import {setNewPassword, setPassword} from "../password-recovery-reduser";
+import {useSelector} from "react-redux";
+import {sendNewPassword, setNewPassword} from "../password-recovery-reduser";
+import {useNewPasswordHandler} from "../../../../hooks/newPasswordHandler/newPasswordHandler";
+import {PATH} from "../../../../main/ui/routes/Routes";
 
 
 export function NewPassword() {
-    const password = useSelector((state: AppRootStateType) => state.passwordRecovery.password)
-    const passwordError = password ? '' : 'password error'
-    const dispatch = useDispatch();
-    const {token} = useParams() as any;
+    const newPassword = useSelector((state: AppRootStateType) => state.passwordRecovery.newPassword)
+    const isSending = useSelector((state: AppRootStateType) => state.passwordRecovery.isSending)
+    const {token} = useParams() as { token: string; }
+    let navigate = useNavigate();
+    const {
+        onChange,
+        onClick,
+        newPasswordError
+    } = useNewPasswordHandler({
+        action: setNewPassword,
+        thunk: sendNewPassword,
+        newPassword,
+        token
+    })
+    if (isSending) {
+        navigate(`${PATH.LOGIN}`)
+    }
 
-    const onChangePassword = () => {
-        dispatch(setPassword(password))
-    }
-    const onSetNewPassword = () => {
-        dispatch(setNewPassword(token, password))
-    }
-    const showEmail = () => {
-        if (passwordError) {
-            alert('Неверный Адресс')
-        } else {
-            alert(password)
-        }
-    }
     return (
         <div className='container'>
             <div className={styles.newPassword}>
@@ -38,10 +40,10 @@ export function NewPassword() {
                         <SuperInputText
                             formName={'Password'}
                             type={'password'}
-                            value={password}
-                            onChangeText={onChangePassword}
-                            onEnter={showEmail}
-                            error={passwordError}
+                            value={newPassword}
+                            onChangeText={onChange}
+                            onEnter={onClick}
+                            error={newPasswordError}
                             spanClassName={s.testSpanError}
                             inputStyle
                         />
@@ -52,7 +54,7 @@ export function NewPassword() {
                             color={'blue'}
                             fontColor={'white'}
                             size={'big'}
-                            onClick={onSetNewPassword}
+                            onClick={onClick}
                             btn>
                             Create New Password
                         </SuperButton>
