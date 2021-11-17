@@ -47,6 +47,9 @@ export const sendRegisterDataTC = (email: string, password: string) => {
             .then((res) => {
                 dispatch(setEmailPasswordRegister(email,password))
             })
+            .catch((error) => {
+                console.log({...error})
+            })
     }
 }
 

@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import styles from './Register.module.css'
 import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
+import {useDispatch} from "react-redux";
+import {sendRegisterDataTC} from "./register-reduser";
 
 
 
@@ -12,6 +14,7 @@ export function Register() {
     const emailError = email ? '' : 'email required'
     const passwordError = password ? '' : 'password required'
     const confirmError = confirmPassword ? '' : 'confirm password required'
+    const dispatch = useDispatch();
 
     const showEmail = () => {
         if (emailError) {
@@ -36,6 +39,12 @@ export function Register() {
             alert(confirmPassword)
         }
     }
+
+    const sendDataHandler = () => {
+        dispatch(sendRegisterDataTC(email, password))
+    }
+
+    const disabledBtn = password !== confirmPassword ;
 
     return (
         <div className='container'>
@@ -87,7 +96,7 @@ export function Register() {
                                 color={'blue'}
                                 fontColor={'white'}
                                 size={'small'}
-                                btn>
+                                btn >
                                 Cancel
                             </SuperButton>
                         </div>
@@ -96,7 +105,9 @@ export function Register() {
                                 color={'blue'}
                                 fontColor={'white'}
                                 size={'medium'}
-                                btn>
+                                btn
+                                onClick={sendDataHandler}
+                                disabled={disabledBtn} >
                                 Register
                             </SuperButton>
                         </div>
