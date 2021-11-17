@@ -3,20 +3,26 @@ import styles from './PasswordRecovery.module.css'
 import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInputText";
 import s from "../../../main/ui/common/HW4.module.css";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../main/bll/store";
 import {sendInstructions, setEmail} from "./password-recovery-reduser";
+import {usePasswordRecoveryHandler} from "../../../hooks/passwordRecoveryHandler/passwordRecoveryHandler";
+import {useNavigate} from "react-router-dom";
+import {PATH} from "../../../main/ui/routes/Routes";
 
 
 export function PasswordRecovery() {
     const email = useSelector((state: AppRootStateType) => state.passwordRecovery.email)
-    const emailError = email ? '' : 'email error'
-    const dispatch = useDispatch()
-    const onEmailChange = (email: string) => {
-        dispatch(setEmail(email));
-    }
-    const onClickBtn = () => {
-        dispatch(sendInstructions(email))
+    const isSending = useSelector((state: AppRootStateType) => state.passwordRecovery.isSending)
+    let navigate = useNavigate();
+    const {
+        onChange,
+        onClick,
+        emailError
+    } = usePasswordRecoveryHandler({action: setEmail, thunk: sendInstructions, email});
+
+    if (isSending) {
+        navigate(`${PATH.CHECK_EMAIL}`)
     }
     const showEmail = () => {
         if (emailError) {
@@ -52,7 +58,7 @@ export function PasswordRecovery() {
                             fontColor={'white'}
                             size={'big'}
                             btn
-                            onClick={onClickBtn}
+                            onClick={onClick}
                         >
                             Send Instructions
                         </SuperButton>

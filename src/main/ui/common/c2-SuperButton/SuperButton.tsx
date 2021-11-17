@@ -25,7 +25,6 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
 ) => {
     const onClickCallback = (e:MouseEvent<HTMLButtonElement>) => {
         onClick && onClick(e)
-
     }
     let btnFontColor = 'black'
     let btnSize = '140px'
