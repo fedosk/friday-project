@@ -3,28 +3,31 @@ import styles from './Login.module.css'
 import s from "../../../main/ui/common/HW4.module.css";
 import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
+import {EMPTY_STRING, FAILED, loginTC, RequestStatusType, SUCCEEDED} from "./login-reduser";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../../main/bll/store";
+import {PATH} from "../../../main/ui/routes/Routes";
+import {Navigate} from "react-router-dom";
 
 
 export function Login() {
-    const [email, setEmail] = useState<string>('')
-    const [password, setpassword] = useState<string>('')
-    const emailError = email ? '' : 'email error'
-    const passwordError = password ? '' : 'password error'
+    const [email, setEmail] = useState<string>(EMPTY_STRING)
+    const [password, setpassword] = useState<string>(EMPTY_STRING)
+    const emailError = email ? EMPTY_STRING : 'email error'
+    const passwordError = password ? EMPTY_STRING : 'password error'
 
-    const showEmail = () => {
-        if (emailError) {
-            alert('введите текст...')
-        } else {
-            alert(email)
-        }
+    const dispatch = useDispatch()
+    const authStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.login.status)
+
+    function sendLoginRequest(email: string, password: string) {
+        dispatch(loginTC(email, password))
     }
 
-    const showPassword = () => {
-        if (passwordError) {
-            alert('введите текст...')
-        } else {
-            alert(password)
-        }
+    if (authStatus === SUCCEEDED) {
+        return <Navigate to={PATH.PROFILE}/>
+    }
+    if (authStatus === FAILED) {
+        return <Navigate to={PATH.ERROR404}/>
     }
 
     return (
@@ -39,7 +42,6 @@ export function Login() {
                             type={'email'}
                             value={email}
                             onChangeText={setEmail}
-                            onEnter={showEmail}
                             error={emailError}
                             spanClassName={s.testSpanError}
                             inputStyle
@@ -52,7 +54,6 @@ export function Login() {
                             type={'password'}
                             value={password}
                             onChangeText={setpassword}
-                            onEnter={showPassword}
                             error={passwordError}
                             spanClassName={s.testSpanError}
                             inputStyle
@@ -70,6 +71,7 @@ export function Login() {
                             color={'blue'}
                             fontColor={'white'}
                             size={'big'}
+                            onClick={() => sendLoginRequest(email, password)}
                             btn>
                             Login
                         </SuperButton>

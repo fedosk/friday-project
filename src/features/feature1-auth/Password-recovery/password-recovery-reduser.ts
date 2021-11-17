@@ -4,6 +4,7 @@ import axios from 'axios';
 export const apiServices = axios.create({
     baseURL: `https://neko-back.herokuapp.com/2.0/`,
 });
+
 const apiRecoveryPassword = {
     getInstructions(email: string) {
         return apiServices.post(`auth/forgot`, {
