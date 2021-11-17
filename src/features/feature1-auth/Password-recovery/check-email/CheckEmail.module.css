@@ -1,11 +1,11 @@
-.passwordRecovery {
+.checkEmail {
     display: flex;
     align-items: center;
     justify-content: center;
     height: calc(100vh - 60px);
 }
 
-.passwordRecoveryWindow {
+.checkEmailWindow {
     width: 413px;
     height: 540px;
     border-radius: 8px;
@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .logo {
@@ -22,34 +22,24 @@
     margin-top: 25px;
 }
 
-.forgotYourPassword {
-    font-family: 'Poppins', sans-serif;
-    font-size: 22px;
-    margin-top: 32px;
-}
-
-.emailWrapper {
+.checkEmailWrapper {
     margin-top: 38px;
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.checkEmailImg {
+    width:108px;
+    height: 108px;
+}
+.checkEmailWrapper h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    margin-top: 25px;
 }
 
-.passwordWrapper {
-    margin-top: 24px;
-}
-
-.sendInstructionsBtn {
-    margin: 92px 0 31px;
-}
-
-.tryLoginBtn {
-    font-family: SF UI Display;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-    color: #21268F;
-}
 span {
     width: 347px;
     height: 48px;

@@ -1,4 +1,4 @@
-import React, {ButtonHTMLAttributes, DetailedHTMLProps} from 'react'
+import React, {ButtonHTMLAttributes, DetailedHTMLProps, MouseEvent} from 'react'
 import s from './SuperButton.module.css'
 
 // тип пропсов обычной кнопки, children в котором храниться название кнопки там уже описан
@@ -11,6 +11,7 @@ type SuperButtonPropsType = DefaultButtonPropsType & {
     fontColor?: string
     size?: string
     fontSize?: string
+    onClick?: () => void
 }
 
 const SuperButton: React.FC<SuperButtonPropsType> = (
@@ -18,10 +19,14 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
         red, className, btn,
         color,fontColor,
         size,fontSize,
+        onClick,
         ...restProps// все остальные пропсы попадут в объект restProps, там же будет children
     }
 ) => {
+    const onClickCallback = (e:MouseEvent<HTMLButtonElement>) => {
+        onClick && onClick(e)
 
+    }
     let btnFontColor = 'black'
     let btnSize = '140px'
     let btnFontSize = '14px'
@@ -59,6 +64,7 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
 
     return (
         <button
+            onClick={onClickCallback}
             className={`${btnClassName} ${blueBtnClassName}`}
             style={{ width: `${btnSize}`, fontSize: `${btnFontSize}`, color: `${btnFontColor}`}}
             {...restProps}
