@@ -1,6 +1,7 @@
 import {useDispatch} from "react-redux";
 import {Dispatch, useState} from "react";
-import {SetEmailType} from "../../features/feature1-auth/password-recovery/password-recovery-reduser";
+import {SetEmailType} from "../../features/feature1-auth/Password-recovery/password-recovery-reduser";
+
 
 type ThunkType = (dispatch: Dispatch<any>) => void
 type usePasswordRecoveryHandlerType = {
