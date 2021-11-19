@@ -27,9 +27,10 @@ export function Login() {
     if (authStatus === SUCCEEDED) {
         return <Navigate to={PATH.PROFILE}/>
     }
-    /*if (authStatus === FAILED) {
-        return <Navigate to={PATH.ERROR404}/>
-    }*/
+
+    if (authStatus === FAILED) {
+        return <Navigate to={PATH.ERROR}/>
+    }
 
     return (
         <div className='container'>

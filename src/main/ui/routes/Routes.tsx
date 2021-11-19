@@ -19,6 +19,7 @@ export const PATH = {
     PROFILE: '/Profile',
     REGISTER: '/Register',
     SUPER_COMPONENTS: '/super-components',
+    ERROR: '/error404',
 }
 
 export function Rout() {
@@ -32,6 +33,7 @@ export function Rout() {
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
                 <Route path={PATH.REGISTER} element={<Register/>}/>
                 <Route path={PATH.SUPER_COMPONENTS} element={<SuperComponents/>}/>
+                <Route path={PATH.ERROR} element={<Error404/>}/>
                 <Route path={'*'} element={<Error404/>}/>
             </Routes>
         </div>
