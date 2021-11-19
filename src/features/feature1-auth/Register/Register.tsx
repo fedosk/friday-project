@@ -37,6 +37,9 @@ export function Register() {
         }
     }
 
+    const passwordPlace = password || confirmPassword
+    const disabledBtn = passwordPlace === '';
+
     if (okSignUp) {
         navigate(`${PATH.LOGIN}`)
     }
@@ -103,6 +106,7 @@ export function Register() {
                                 size={'medium'}
                                 btn
                                 onClick={sendDataHandler}
+                                disabled={disabledBtn}
                                 >
                                 Register
                             </SuperButton>
