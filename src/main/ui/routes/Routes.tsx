@@ -2,13 +2,13 @@ import React from 'react';
 import {Route, Routes} from "react-router-dom";
 
 import {Error404} from "../../../features/feature1-auth/Error404/Error404";
+import { Login } from '../../../features/feature1-auth/Login/Login';
 import {SuperComponents} from "../common/HW4";
 import {NewPassword} from "../../../features/feature1-auth/Password-recovery/new-password/NewPassword";
-import {Register} from "../../../features/feature1-auth/Register/Register";
-import {Login} from "../../../features/feature1-auth/Login/Login";
 import {PasswordRecovery} from "../../../features/feature1-auth/Password-recovery/PasswordRecovery";
-import {Profile} from "../../../features/feature1-auth/Profile/Profile";
 import {CheckEmail} from "../../../features/feature1-auth/Password-recovery/check-email/CheckEmail";
+import {Profile} from "../../../features/feature1-auth/Profile/Profile";
+import {Register} from "../../../features/feature1-auth/Register/Register";
 
 
 export const PATH = {
@@ -19,7 +19,6 @@ export const PATH = {
     PROFILE: '/Profile',
     REGISTER: '/Register',
     SUPER_COMPONENTS: '/super-components',
-    ERROR404: '/Error404',
 }
 
 export function Rout() {
@@ -33,7 +32,6 @@ export function Rout() {
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
                 <Route path={PATH.REGISTER} element={<Register/>}/>
                 <Route path={PATH.SUPER_COMPONENTS} element={<SuperComponents/>}/>
-                <Route path={PATH.ERROR404} element={<Error404/>}/>
                 <Route path={'*'} element={<Error404/>}/>
             </Routes>
         </div>

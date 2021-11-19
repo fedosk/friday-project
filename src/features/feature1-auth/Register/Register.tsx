@@ -2,49 +2,47 @@ import React, {useState} from 'react';
 import styles from './Register.module.css'
 import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {sendRegisterDataTC} from "./register-reduser";
-
+import {AppRootStateType} from "../../../main/bll/store";
+import {useNavigate} from "react-router-dom";
+import {PATH} from "../../../main/ui/routes/Routes";
 
 
 export function Register() {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
+
     const emailError = email ? '' : 'email required'
     const passwordError = password ? '' : 'password required'
     const confirmError = confirmPassword ? '' : 'confirm password required'
+
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const showEmail = () => {
-        if (emailError) {
-            alert('введите email...')
-        } else {
-            alert(email)
-        }
-    }
+    const okSignUp = useSelector<AppRootStateType, boolean>((state) => state.register.isSignUp);
+    const error = useSelector<AppRootStateType, string>((state) => state.register.error)
+    const errorInfo = useSelector<AppRootStateType, string>((state) => state.register.infoError)
 
-    const showPassword = () => {
-        if (passwordError) {
-            alert('введите пароль...')
-        } else {
-            alert(password)
-        }
-    }
-
-    const showConfirmPassword = () => {
-        if (passwordError) {
-            alert('введите пароль повторно...')
-        } else {
-            alert(confirmPassword)
-        }
+    const onEnterPassword = () => {
+        alert('подтвердите пароль!!')
     }
 
     const sendDataHandler = () => {
-        dispatch(sendRegisterDataTC(email, password))
+        if (password !== confirmPassword) {
+            alert('неверно введен пароль подтверждения...')
+        } else {
+            dispatch(sendRegisterDataTC(email, password))
+        }
     }
 
-    const disabledBtn = password !== confirmPassword ;
+    const passwordPlace = password || confirmPassword
+    const disabledBtn = passwordPlace === '';
+
+    if (okSignUp) {
+        navigate(`${PATH.LOGIN}`)
+    }
 
     return (
         <div className='container'>
@@ -58,10 +56,10 @@ export function Register() {
                             type={'email'}
                             value={email}
                             onChangeText={setEmail}
-                            onEnter={showEmail}
-                            error={emailError}
+                            error={error}
                             spanClassName={styles.spanError}
                             inputStyle
+
                         />
                     </div>
                     <div className={styles.passwordWrapper}>
@@ -71,11 +69,12 @@ export function Register() {
                             type={'password'}
                             value={password}
                             onChangeText={setPassword}
-                            onEnter={showPassword}
-                            error={passwordError}
+                            onEnter={onEnterPassword}
+                            error={errorInfo}
                             spanClassName={styles.spanError}
                             inputStyle
                         />
+
                     </div>
                     <div className={styles.passwordWrapper}>
                         <SuperInputText
@@ -84,8 +83,8 @@ export function Register() {
                             type={'password'}
                             value={confirmPassword}
                             onChangeText={setConfirmPassword}
-                            onEnter={showConfirmPassword}
-                            error={confirmError}
+                            onEnter={sendDataHandler}
+                            error={errorInfo}
                             spanClassName={styles.spanError}
                             inputStyle
                         />
@@ -96,7 +95,7 @@ export function Register() {
                                 color={'blue'}
                                 fontColor={'white'}
                                 size={'small'}
-                                btn >
+                                btn>
                                 Cancel
                             </SuperButton>
                         </div>
@@ -107,7 +106,8 @@ export function Register() {
                                 size={'medium'}
                                 btn
                                 onClick={sendDataHandler}
-                                disabled={disabledBtn} >
+                                disabled={disabledBtn}
+                                >
                                 Register
                             </SuperButton>
                         </div>

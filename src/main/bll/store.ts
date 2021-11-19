@@ -5,8 +5,6 @@ import {registerReducer} from "../../features/feature1-auth/Register/register-re
 import {passwordRecoveryReducer} from "../../features/feature1-auth/Password-recovery/password-recovery-reduser";
 import {profileReducer} from "../../features/feature1-auth/Profile/profile-reduser";
 
-
-
 const rootReducer = combineReducers({
     login:loginReducer,
     register: registerReducer,
