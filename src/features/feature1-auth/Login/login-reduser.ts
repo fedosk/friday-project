@@ -4,6 +4,7 @@ import {authApi} from "../../../main/dal/auth-api";
 
 const AUTH_USER = 'login/AUTH_USER'
 const SET_STATUS = 'login/SET_STATUS'
+const ERROR_AUTH = 'login/ERROR_AUTH'
 
 export const IDLE = 'idle'
 export const LOADING = 'loading'
@@ -53,6 +54,9 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
         case SET_STATUS: {
             return {...state, status: action.status}
         }
+        case ERROR_AUTH: {
+            return {...state, error: action.error}
+        }
         default:
             return state
     }
@@ -60,6 +64,7 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
 
 export const authUserRequest = (userData: InitialStateType) => ({type: AUTH_USER, userData} as const)
 export const setStatusAuthUser = (status: RequestStatusType) => ({type: SET_STATUS, status} as const)
+export const errorAuthUser = (error: string) => ({type: ERROR_AUTH, error} as const)
 
 export const loginTC = (email: string, password: string) => (dispatch: Dispatch<ActionsType>) => {
     authApi.loginUser(email, password)
@@ -71,9 +76,11 @@ export const loginTC = (email: string, password: string) => (dispatch: Dispatch<
         })
         .catch(error => {
             dispatch(setStatusAuthUser('failed'))
+            dispatch(errorAuthUser(error.error))
             console.log(error)
         })
 }
 
 export type ActionsType = ReturnType<typeof authUserRequest>
     | ReturnType<typeof setStatusAuthUser>
+    | ReturnType<typeof errorAuthUser>

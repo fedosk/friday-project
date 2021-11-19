@@ -6,7 +6,6 @@ const initialState = {
     isSending: false,
     newPassword: '',
 }
-
 type InitialStateType = typeof initialState
 
 export const passwordRecoveryReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {

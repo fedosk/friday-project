@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../main/bll/store";
 import {sendInstructions, setEmail} from "./password-recovery-reduser";
 import {usePasswordRecoveryHandler} from "../../../hooks/passwordRecoveryHandler/passwordRecoveryHandler";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {PATH} from "../../../main/ui/routes/Routes";
 
 
@@ -32,7 +32,6 @@ export function PasswordRecovery() {
         }
     }
 
-
     return (
         <div className='container'>
             <div className={styles.passwordRecovery}>
@@ -44,7 +43,7 @@ export function PasswordRecovery() {
                             formName={'Email'}
                             type={'email'}
                             value={email}
-                            onChangeText={onEmailChange}
+                            onChangeText={onChange}
                             onEnter={showEmail}
                             error={emailError}
                             spanClassName={s.testSpanError}
@@ -65,12 +64,14 @@ export function PasswordRecovery() {
                     </div>
                     <span>Did you remember your password?</span>
                     <div className={styles.tryLoginBtn}>
-                        <SuperButton
-                            fontColor={'#21268F'}
-                            fontSize={'big'}
-                            size={'small'}>
-                            Try logging in
-                        </SuperButton>
+                        <Link to={PATH.LOGIN}>
+                            <SuperButton
+                                fontColor={'#21268F'}
+                                fontSize={'big'}
+                                size={'small'}>
+                                Try logging in
+                            </SuperButton>
+                        </Link>
                     </div>
                 </div>
             </div>

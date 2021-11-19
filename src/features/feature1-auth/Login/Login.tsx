@@ -7,7 +7,7 @@ import {EMPTY_STRING, FAILED, loginTC, RequestStatusType, SUCCEEDED} from "./log
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../main/bll/store";
 import {PATH} from "../../../main/ui/routes/Routes";
-import {Navigate} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 
 
 export function Login() {
@@ -18,6 +18,7 @@ export function Login() {
 
     const dispatch = useDispatch()
     const authStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.login.status)
+    const error = useSelector<AppRootStateType, string>(state => state.login.error)
 
     function sendLoginRequest(email: string, password: string) {
         dispatch(loginTC(email, password))
@@ -26,16 +27,19 @@ export function Login() {
     if (authStatus === SUCCEEDED) {
         return <Navigate to={PATH.PROFILE}/>
     }
-    if (authStatus === FAILED) {
+    /*if (authStatus === FAILED) {
         return <Navigate to={PATH.ERROR404}/>
-    }
+    }*/
 
     return (
         <div className='container'>
             <div className={styles.loginWrapper}>
                 <div className={styles.loginWindow}>
                     <h1 className={styles.logo}>It-incubator</h1>
-                    <h2 className={styles.signIn}>Sign In</h2>
+                    {error
+                        ? <h2 className={styles.signIn}>{error}</h2>
+                        : <h2 className={styles.signIn}>Sign In</h2>
+                    }
                     <div className={styles.emailWrapper}>
                         <SuperInputText
                             formName={'Email'}
@@ -60,11 +64,13 @@ export function Login() {
                         />
                     </div>
                     <div className={styles.forgotPasswordBtn}>
-                        <SuperButton
-                            fontSize={'medium'}
-                            size={'medium'}>
-                            Forgot password
-                        </SuperButton>
+                        <Link to={PATH.PASSWORD_RECOVERY}>
+                            <SuperButton
+                                fontSize={'medium'}
+                                size={'medium'}>
+                                Forgot password
+                            </SuperButton>
+                        </Link>
                     </div>
                     <div className={styles.loginBtn}>
                         <SuperButton
@@ -78,12 +84,15 @@ export function Login() {
                     </div>
                     <span>Don’t have an account?</span>
                     <div className={styles.signUpBtn}>
-                        <SuperButton
-                            fontColor={'#21268F'}
-                            fontSize={'big'}
-                            size={'small'}>
-                            Sign Up
-                        </SuperButton>
+                        <Link to={PATH.REGISTER}>
+                            <SuperButton
+                                fontColor={'#21268F'}
+                                fontSize={'big'}
+                                size={'small'}
+                                btn>
+                                Sign Up
+                            </SuperButton>
+                        </Link>
                     </div>
                 </div>
             </div>
