@@ -6,9 +6,9 @@ import SuperButton from "../../../../main/ui/common/c2-SuperButton/SuperButton";
 import {useNavigate, useParams} from "react-router-dom";
 import {AppRootStateType} from "../../../../main/bll/store";
 import {useSelector} from "react-redux";
-import {sendNewPassword, setNewPassword} from "../password-recovery-reduser";
 import {useNewPasswordHandler} from "../../../../hooks/newPasswordHandler/newPasswordHandler";
 import {PATH} from "../../../../main/ui/routes/Routes";
+import {sendNewPassword, setNewPassword} from "../password-recovery-reduser";
 
 
 export function NewPassword() {

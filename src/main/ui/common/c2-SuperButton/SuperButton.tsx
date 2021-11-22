@@ -23,9 +23,11 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
         ...restProps// все остальные пропсы попадут в объект restProps, там же будет children
     }
 ) => {
+
     const onClickCallback = (e:MouseEvent<HTMLButtonElement>) => {
         onClick && onClick(e)
     }
+
     let btnFontColor = 'black'
     let btnSize = '140px'
     let btnFontSize = '14px'

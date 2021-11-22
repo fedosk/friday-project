@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../main/bll/store";
 import {sendInstructions, setEmail} from "./password-recovery-reduser";
 import {usePasswordRecoveryHandler} from "../../../hooks/passwordRecoveryHandler/passwordRecoveryHandler";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {PATH} from "../../../main/ui/routes/Routes";
 
 
@@ -24,6 +24,13 @@ export function PasswordRecovery() {
     if (isSending) {
         navigate(`${PATH.CHECK_EMAIL}`)
     }
+    const showEmail = () => {
+        if (emailError) {
+            alert('Неверный Адрес')
+        } else {
+            alert(email)
+        }
+    }
 
     return (
         <div className='container'>
@@ -37,7 +44,7 @@ export function PasswordRecovery() {
                             type={'email'}
                             value={email}
                             onChangeText={onChange}
-                            onEnter={onClick}
+                            onEnter={showEmail}
                             error={emailError}
                             spanClassName={s.testSpanError}
                             inputStyle
@@ -57,12 +64,14 @@ export function PasswordRecovery() {
                     </div>
                     <span>Did you remember your password?</span>
                     <div className={styles.tryLoginBtn}>
-                        <SuperButton
-                            fontColor={'#21268F'}
-                            fontSize={'big'}
-                            size={'small'}>
-                            Try logging in
-                        </SuperButton>
+                        <Link to={PATH.LOGIN}>
+                            <SuperButton
+                                fontColor={'#21268F'}
+                                fontSize={'big'}
+                                size={'small'}>
+                                Try logging in
+                            </SuperButton>
+                        </Link>
                     </div>
                 </div>
             </div>

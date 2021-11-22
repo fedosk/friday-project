@@ -1,11 +1,9 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import {loginReducer} from "../../features/feature1-auth/login/login-reduser";
-import {registerReducer} from "../../features/feature1-auth/register/register-reduser";
-import {passwordRecoveryReducer} from "../../features/feature1-auth/password-recovery/password-recovery-reduser";
-import {profileReducer} from "../../features/feature1-auth/profile/profile-reduser";
-
-
+import {loginReducer} from "../../features/feature1-auth/Login/login-reduser";
+import {registerReducer} from "../../features/feature1-auth/Register/register-reduser";
+import {passwordRecoveryReducer} from "../../features/feature1-auth/Password-recovery/password-recovery-reduser";
+import {profileReducer} from "../../features/feature1-auth/Profile/profile-reduser";
 
 const rootReducer = combineReducers({
     login:loginReducer,
