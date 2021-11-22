@@ -1,5 +1,5 @@
 import {Dispatch} from "react";
-import {apiRecoveryPassword} from "../../../main/ui/api/apiRecoveryPassword/apiRecoveryPassword";
+import {apiRecoveryPassword} from "../../../main/dal/apiRecoveryPassword/apiRecoveryPassword";
 
 const initialState = {
     email: '',

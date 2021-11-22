@@ -1,4 +1,4 @@
-import {apiServices} from "../api";
+import {apiServices} from "../apiServices/apiServices";
 
 export const apiRecoveryPassword = {
     getInstructions(email: string) {
