@@ -1,0 +1,31 @@
+.tableContainer {
+    max-width: 1038px;
+    padding: 15px;
+    margin: 0 auto;
+    min-height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+}
+
+.mainWrapper {
+    width: 1000px;
+    height: 640px;
+    display: flex;
+    justify-content: center;
+}
+
+.leftBar {
+    width: 250px;
+    height: 640px;
+    border-radius: 8px 0 0 8px;
+    background-color: #ECECF9;
+    padding: 15px;
+}
+
+.tableWrapper {
+    border-radius: 0 8px 8px 0;
+    width: 750px;
+    height: 640px;
+    background-color: #FEFEFF;
+    padding: 15px;
+}

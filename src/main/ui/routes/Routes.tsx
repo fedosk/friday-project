@@ -21,7 +21,7 @@ export const path = {
 
 export function Rout() {
     return (
-        <div className={'Routes'}>
+        <div className='routes'>
             <Routes>
                 <Route path='/' element={<Login/>}/>
                 <Route path={path.login} element={<Login/>}/>
