@@ -5,8 +5,8 @@ import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {sendRegisterDataTC} from "./register-reduser";
 import {AppRootStateType} from "../../../main/bll/store";
-import {useNavigate} from "react-router-dom";
-import {PATH} from "../../../main/ui/routes/Routes";
+import {Link, useNavigate} from "react-router-dom";
+import {path} from "../../../main/ui/routes/Routes";
 
 
 export function Register() {
@@ -41,7 +41,7 @@ export function Register() {
     const disabledBtn = passwordPlace === '';
 
     if (okSignUp) {
-        navigate(`${PATH.LOGIN}`)
+        navigate(`${path.login}`)
     }
 
     return (
@@ -91,13 +91,15 @@ export function Register() {
                     </div>
                     <div className={styles.buttons}>
                         <div className={styles.cancelBtn}>
-                            <SuperButton
-                                color={'blue'}
-                                fontColor={'white'}
-                                size={'small'}
-                                btn>
-                                Cancel
-                            </SuperButton>
+                            <Link to={path.login}>
+                                <SuperButton
+                                    color={'blue'}
+                                    fontColor={'white'}
+                                    size={'small'}
+                                    btn>
+                                    Cancel
+                                </SuperButton>
+                            </Link>
                         </div>
                         <div className={styles.registerBtn}>
                             <SuperButton
@@ -107,7 +109,7 @@ export function Register() {
                                 btn
                                 onClick={sendDataHandler}
                                 disabled={disabledBtn}
-                                >
+                            >
                                 Register
                             </SuperButton>
                         </div>

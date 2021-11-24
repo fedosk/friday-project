@@ -1,7 +1,6 @@
 import {Dispatch} from "react";
 import {authApi} from "../../../main/dal/auth-api";
 
-
 const AUTH_USER = 'login/AUTH_USER'
 const SET_STATUS = 'login/SET_STATUS'
 const ERROR_AUTH = 'login/ERROR_AUTH'

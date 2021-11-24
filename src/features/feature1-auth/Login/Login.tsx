@@ -6,7 +6,7 @@ import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
 import {EMPTY_STRING, FAILED, loginTC, RequestStatusType, SUCCEEDED} from "./login-reduser";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../main/bll/store";
-import {PATH} from "../../../main/ui/routes/Routes";
+import {path} from "../../../main/ui/routes/Routes";
 import {Link, Navigate} from "react-router-dom";
 
 
@@ -25,11 +25,11 @@ export function Login() {
     }
 
     if (authStatus === SUCCEEDED) {
-        return <Navigate to={PATH.PROFILE}/>
+        return <Navigate to={path.profile}/>
     }
 
     if (authStatus === FAILED) {
-        return <Navigate to={PATH.ERROR}/>
+        return <Navigate to={path.error}/>
     }
 
     return (
@@ -65,7 +65,7 @@ export function Login() {
                         />
                     </div>
                     <div className={styles.forgotPasswordBtn}>
-                        <Link to={PATH.PASSWORD_RECOVERY}>
+                        <Link to={path.passwordRecovery}>
                             <SuperButton
                                 fontSize={'medium'}
                                 size={'medium'}>
@@ -85,7 +85,7 @@ export function Login() {
                     </div>
                     <span>Don’t have an account?</span>
                     <div className={styles.signUpBtn}>
-                        <Link to={PATH.REGISTER}>
+                        <Link to={path.register}>
                             <SuperButton
                                 fontColor={'#21268F'}
                                 fontSize={'big'}

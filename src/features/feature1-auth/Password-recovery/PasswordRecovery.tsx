@@ -8,7 +8,7 @@ import {AppRootStateType} from "../../../main/bll/store";
 import {sendInstructions, setEmail} from "./password-recovery-reduser";
 import {usePasswordRecoveryHandler} from "../../../hooks/passwordRecoveryHandler/passwordRecoveryHandler";
 import {Link, useNavigate} from "react-router-dom";
-import {PATH} from "../../../main/ui/routes/Routes";
+import {path} from "../../../main/ui/routes/Routes";
 
 
 export function PasswordRecovery() {
@@ -22,7 +22,7 @@ export function PasswordRecovery() {
     } = usePasswordRecoveryHandler({action: setEmail, thunk: sendInstructions, email});
 
     if (isSending) {
-        navigate(`${PATH.CHECK_EMAIL}`)
+        navigate(`${path.checkEmail}`)
     }
     const showEmail = () => {
         if (emailError) {
@@ -64,7 +64,7 @@ export function PasswordRecovery() {
                     </div>
                     <span>Did you remember your password?</span>
                     <div className={styles.tryLoginBtn}>
-                        <Link to={PATH.LOGIN}>
+                        <Link to={path.login}>
                             <SuperButton
                                 fontColor={'#21268F'}
                                 fontSize={'big'}

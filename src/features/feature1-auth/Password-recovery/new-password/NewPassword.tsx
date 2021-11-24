@@ -7,7 +7,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {AppRootStateType} from "../../../../main/bll/store";
 import {useSelector} from "react-redux";
 import {useNewPasswordHandler} from "../../../../hooks/newPasswordHandler/newPasswordHandler";
-import {PATH} from "../../../../main/ui/routes/Routes";
+import {path} from "../../../../main/ui/routes/Routes";
 import {sendNewPassword, setNewPassword} from "../password-recovery-reduser";
 
 
@@ -27,7 +27,7 @@ export function NewPassword() {
         token
     })
     if (isSending) {
-        navigate(`${PATH.LOGIN}`)
+        navigate(`${path.login}`)
     }
 
     return (

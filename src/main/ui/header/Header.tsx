@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Header.module.css'
 import {NavLink} from 'react-router-dom';
-import {PATH} from "../routes/Routes";
+import {path} from "../routes/Routes";
 import {setStatusAuthUser} from "../../../features/feature1-auth/Login/login-reduser";
 import {useDispatch} from "react-redux";
 
@@ -13,26 +13,23 @@ export function Header() {
             <div className='container'>
                 <ul className={styles.list}>
                     <li className={styles.item}>
-                        <NavLink to={PATH.LOGIN}><h1 className={styles.logo}>It-incubator</h1></NavLink>
+                        <NavLink to={path.login}><h1 className={styles.logo}>It-incubator</h1></NavLink>
                     </li>
                     <li className={styles.item}>
-                        <NavLink to={PATH.LOGIN}
+                        <NavLink to={path.login}
                                  onClick={() => (dispatch(setStatusAuthUser('idle')))}>LOGIN</NavLink>
                     </li>
                     <li className={styles.item}>
-                        <NavLink to={PATH.NEW_PASSWORD}>NEW PASSWORD</NavLink>
+                        <NavLink to={path.newPassword}>NEW PASSWORD</NavLink>
                     </li>
                     <li className={styles.item}>
-                        <NavLink to={PATH.PASSWORD_RECOVERY}>PASSWORD RECOVERY</NavLink>
+                        <NavLink to={path.passwordRecovery}>PASSWORD RECOVERY</NavLink>
                     </li>
                     <li className={styles.item}>
-                        <NavLink to={PATH.PROFILE}>PROFILE</NavLink>
+                        <NavLink to={path.profile}>PROFILE</NavLink>
                     </li>
                     <li className={styles.item}>
-                        <NavLink to={PATH.REGISTER}>REGISTER</NavLink>
-                    </li>
-                    <li className={styles.item}>
-                        <NavLink to={PATH.SUPER_COMPONENTS}>SUPER COMPONENTS</NavLink>
+                        <NavLink to={path.register}>REGISTER</NavLink>
                     </li>
                 </ul>
             </div>
