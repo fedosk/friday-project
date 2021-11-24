@@ -1,21 +1,24 @@
 import React from 'react';
 import styles from './NewPassword.module.css'
-import SuperInputText from "../../../../main/ui/common/c1-SuperInputText/SuperInputText";
-import s from "../../../../main/ui/common/HW4.module.css";
-import SuperButton from "../../../../main/ui/common/c2-SuperButton/SuperButton";
-import {useNavigate, useParams} from "react-router-dom";
-import {AppRootStateType} from "../../../../main/bll/store";
+import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInputText";
+import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
+import {Navigate, useParams} from "react-router-dom";
+import {AppRootStateType} from "../../../main/bll/store";
 import {useSelector} from "react-redux";
-import {useNewPasswordHandler} from "../../../../hooks/newPasswordHandler/newPasswordHandler";
-import {PATH} from "../../../../main/ui/routes/Routes";
-import {sendNewPassword, setNewPassword} from "../password-recovery-reduser";
+import {useNewPasswordHandler} from "../../../hooks/newPasswordHandler/newPasswordHandler";
+
+import {
+    sendNewPassword,
+    setNewPassword
+} from "../Password-recovery/password-recovery-reduser";
+import {path} from "../../../main/ui/App";
 
 
 export function NewPassword() {
     const newPassword = useSelector((state: AppRootStateType) => state.passwordRecovery.newPassword)
     const isSending = useSelector((state: AppRootStateType) => state.passwordRecovery.isSending)
     const {token} = useParams() as { token: string; }
-    let navigate = useNavigate();
+
     const {
         onChange,
         onClick,
@@ -27,7 +30,7 @@ export function NewPassword() {
         token
     })
     if (isSending) {
-        navigate(`${PATH.LOGIN}`)
+        return <Navigate to={path.login}/>
     }
 
     return (
@@ -44,7 +47,7 @@ export function NewPassword() {
                             onChangeText={onChange}
                             onEnter={onClick}
                             error={newPasswordError}
-                            spanClassName={s.testSpanError}
+                            spanClassName={styles.testSpanError}
                             inputStyle
                         />
                     </div>

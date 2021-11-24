@@ -1,20 +1,18 @@
 import React from 'react';
 import styles from './PasswordRecovery.module.css'
 import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInputText";
-import s from "../../../main/ui/common/HW4.module.css";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../main/bll/store";
 import {sendInstructions, setEmail} from "./password-recovery-reduser";
 import {usePasswordRecoveryHandler} from "../../../hooks/passwordRecoveryHandler/passwordRecoveryHandler";
-import {Link, useNavigate} from "react-router-dom";
-import {PATH} from "../../../main/ui/routes/Routes";
+import {Link, Navigate} from "react-router-dom";
+import {path} from "../../../main/ui/App";
 
 
 export function PasswordRecovery() {
     const email = useSelector((state: AppRootStateType) => state.passwordRecovery.email)
     const isSending = useSelector((state: AppRootStateType) => state.passwordRecovery.isSending)
-    let navigate = useNavigate();
     const {
         onChange,
         onClick,
@@ -22,7 +20,7 @@ export function PasswordRecovery() {
     } = usePasswordRecoveryHandler({action: setEmail, thunk: sendInstructions, email});
 
     if (isSending) {
-        navigate(`${PATH.CHECK_EMAIL}`)
+       return <Navigate to={path.check_email}/>
     }
     const showEmail = () => {
         if (emailError) {
@@ -46,7 +44,7 @@ export function PasswordRecovery() {
                             onChangeText={onChange}
                             onEnter={showEmail}
                             error={emailError}
-                            spanClassName={s.testSpanError}
+                            spanClassName={styles.testSpanError}
                             inputStyle
                         />
                     </div>
@@ -64,7 +62,7 @@ export function PasswordRecovery() {
                     </div>
                     <span>Did you remember your password?</span>
                     <div className={styles.tryLoginBtn}>
-                        <Link to={PATH.LOGIN}>
+                        <Link to={path.login}>
                             <SuperButton
                                 fontColor={'#21268F'}
                                 fontSize={'big'}

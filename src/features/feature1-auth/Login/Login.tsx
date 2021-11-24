@@ -1,13 +1,19 @@
 import React, {useState} from 'react';
 import styles from './Login.module.css'
-import s from "../../../main/ui/common/HW4.module.css";
 import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
-import {EMPTY_STRING, FAILED, loginTC, RequestStatusType, SUCCEEDED} from "./login-reduser";
+import {
+    EMPTY_STRING,
+    FAILED,
+    loginTC,
+    RequestStatusType,
+    SUCCEEDED
+} from "./login-reduser";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../main/bll/store";
-import {PATH} from "../../../main/ui/routes/Routes";
+
 import {Link, Navigate} from "react-router-dom";
+import {path} from "../../../main/ui/App";
 
 
 export function Login() {
@@ -15,21 +21,20 @@ export function Login() {
     const [password, setpassword] = useState<string>(EMPTY_STRING)
     const emailError = email ? EMPTY_STRING : 'email error'
     const passwordError = password ? EMPTY_STRING : 'password error'
-
     const dispatch = useDispatch()
     const authStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.login.status)
-    const error = useSelector<AppRootStateType, string>(state => state.login.error)
+    const error = useSelector<AppRootStateType, string | undefined>(state => state.login.userData.error)
 
     function sendLoginRequest(email: string, password: string) {
         dispatch(loginTC(email, password))
     }
 
     if (authStatus === SUCCEEDED) {
-        return <Navigate to={PATH.PROFILE}/>
+        return <Navigate to={path.main}/>
     }
 
     if (authStatus === FAILED) {
-        return <Navigate to={PATH.ERROR}/>
+        return <Navigate to={path.error}/>
     }
 
     return (
@@ -48,7 +53,7 @@ export function Login() {
                             value={email}
                             onChangeText={setEmail}
                             error={emailError}
-                            spanClassName={s.testSpanError}
+                            spanClassName={styles.testSpanError}
                             inputStyle
                         />
                     </div>
@@ -60,12 +65,12 @@ export function Login() {
                             value={password}
                             onChangeText={setpassword}
                             error={passwordError}
-                            spanClassName={s.testSpanError}
+                            spanClassName={styles.testSpanError}
                             inputStyle
                         />
                     </div>
                     <div className={styles.forgotPasswordBtn}>
-                        <Link to={PATH.PASSWORD_RECOVERY}>
+                        <Link to={path.password_recovery}>
                             <SuperButton
                                 fontSize={'medium'}
                                 size={'medium'}>
@@ -85,7 +90,7 @@ export function Login() {
                     </div>
                     <span>Don’t have an account?</span>
                     <div className={styles.signUpBtn}>
-                        <Link to={PATH.REGISTER}>
+                        <Link to={path.register}>
                             <SuperButton
                                 fontColor={'#21268F'}
                                 fontSize={'big'}

@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './CheckEmail.module.css'
-import checkEmail from '../../../../main/ui/assets/img/icons/checkEmail.svg'
+import checkEmail from '../../../main/ui/assets/img/icons/checkEmail.svg'
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../../../main/bll/store";
+import {AppRootStateType} from "../../../main/bll/store";
 
 
 export const CheckEmail = () => {

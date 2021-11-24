@@ -5,8 +5,8 @@ import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {sendRegisterDataTC} from "./register-reduser";
 import {AppRootStateType} from "../../../main/bll/store";
-import {useNavigate} from "react-router-dom";
-import {PATH} from "../../../main/ui/routes/Routes";
+import {Navigate} from "react-router-dom";
+import {path} from "../../../main/ui/App";
 
 
 export function Register() {
@@ -19,7 +19,7 @@ export function Register() {
     const confirmError = confirmPassword ? '' : 'confirm password required'
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+
 
     const okSignUp = useSelector<AppRootStateType, boolean>((state) => state.register.isSignUp);
     const error = useSelector<AppRootStateType, string>((state) => state.register.error)
@@ -41,7 +41,7 @@ export function Register() {
     const disabledBtn = passwordPlace === '';
 
     if (okSignUp) {
-        navigate(`${PATH.LOGIN}`)
+        return <Navigate to={path.register}/>
     }
 
     return (
@@ -107,7 +107,7 @@ export function Register() {
                                 btn
                                 onClick={sendDataHandler}
                                 disabled={disabledBtn}
-                                >
+                            >
                                 Register
                             </SuperButton>
                         </div>

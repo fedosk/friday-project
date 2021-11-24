@@ -1,20 +1,9 @@
-import axios, {AxiosResponse} from "axios";
 import {Dispatch} from "redux";
+import {registerAPI} from "../../../main/dal/apiRegister/apiRegister";
 
-
-//api
-const instance = axios.create({
-    baseURL: 'https://neko-back.herokuapp.com/2.0'
-})
-
-export const registerAPI = {
-    registerUser(email: string, password: string) {
-        return instance.post<AxiosResponse<string>>(`auth/register`, {email, password})
-    }
-}
 
 const initialState = {
-    email: '',                       //не уверен что email и password здесь нужны
+    email: '',
     password: '',
     isSignUp: false,
     error: '',
@@ -77,7 +66,7 @@ export const sendRegisterDataTC = (email: string, password: string) => {
                 console.log({...e})
                 const emailPasswordError = e.response.data.error
                 const infoSMSError = e.response.data.passwordRegExp
-                dispatch(setError(emailPasswordError, infoSMSError ))
+                dispatch(setError(emailPasswordError, infoSMSError))
                 console.log(emailPasswordError)
                 console.log(infoSMSError)
             })
