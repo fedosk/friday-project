@@ -1,6 +1,5 @@
 import React from 'react';
 import {Route, Routes} from "react-router-dom";
-
 import {Error404} from "../../../features/feature1-auth/Error404/Error404";
 import { Login } from '../../../features/feature1-auth/Login/Login';
 import {SuperComponents} from "../common/HW4";
@@ -21,6 +20,7 @@ export const PATH = {
     SUPER_COMPONENTS: '/super-components',
     ERROR: '/error404',
 }
+
 
 export function Rout() {
     return (
