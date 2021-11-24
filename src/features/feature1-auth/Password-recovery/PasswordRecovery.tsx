@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './PasswordRecovery.module.css'
 import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInputText";
-import s from "../../../main/ui/common/HW4.module.css";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../main/bll/store";
@@ -46,7 +45,6 @@ export function PasswordRecovery() {
                             onChangeText={onChange}
                             onEnter={showEmail}
                             error={emailError}
-                            spanClassName={s.testSpanError}
                             inputStyle
                         />
                     </div>

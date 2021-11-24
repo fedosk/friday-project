@@ -57,7 +57,6 @@ export function Register() {
                             value={email}
                             onChangeText={setEmail}
                             error={error}
-                            spanClassName={styles.spanError}
                             inputStyle
 
                         />
@@ -71,7 +70,6 @@ export function Register() {
                             onChangeText={setPassword}
                             onEnter={onEnterPassword}
                             error={errorInfo}
-                            spanClassName={styles.spanError}
                             inputStyle
                         />
 
@@ -85,7 +83,6 @@ export function Register() {
                             onChangeText={setConfirmPassword}
                             onEnter={sendDataHandler}
                             error={errorInfo}
-                            spanClassName={styles.spanError}
                             inputStyle
                         />
                     </div>

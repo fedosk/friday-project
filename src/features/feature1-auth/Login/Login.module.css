@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 60px);
+    height: 100vh;
 }
 
 .loginWindow {
@@ -48,4 +48,8 @@
 .signUpBtn {
     margin-top: 11px;
     margin-bottom: 40px;
+}
+
+.testSpanError {
+    color: blue;
 }

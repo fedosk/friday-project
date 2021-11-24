@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styles from './Login.module.css'
-import s from "../../../main/ui/common/HW4.module.css";
 import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
 import {EMPTY_STRING, FAILED, loginTC, RequestStatusType, SUCCEEDED} from "./login-reduser";
@@ -48,7 +47,6 @@ export function Login() {
                             value={email}
                             onChangeText={setEmail}
                             error={emailError}
-                            spanClassName={s.testSpanError}
                             inputStyle
                         />
                     </div>
@@ -60,7 +58,6 @@ export function Login() {
                             value={password}
                             onChangeText={setpassword}
                             error={passwordError}
-                            spanClassName={s.testSpanError}
                             inputStyle
                         />
                     </div>

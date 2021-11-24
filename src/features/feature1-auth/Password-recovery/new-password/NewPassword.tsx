@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './NewPassword.module.css'
 import SuperInputText from "../../../../main/ui/common/c1-SuperInputText/SuperInputText";
-import s from "../../../../main/ui/common/HW4.module.css";
 import SuperButton from "../../../../main/ui/common/c2-SuperButton/SuperButton";
 import {useNavigate, useParams} from "react-router-dom";
 import {AppRootStateType} from "../../../../main/bll/store";
@@ -44,7 +43,6 @@ export function NewPassword() {
                             onChangeText={onChange}
                             onEnter={onClick}
                             error={newPasswordError}
-                            spanClassName={s.testSpanError}
                             inputStyle
                         />
                     </div>
