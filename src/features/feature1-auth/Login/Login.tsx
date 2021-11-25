@@ -17,7 +17,7 @@ export function Login() {
 
     const dispatch = useDispatch()
     const authStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.login.status)
-    const error = useSelector<AppRootStateType, string>(state => state.login.error)
+    const error = useSelector<AppRootStateType, string | undefined>(state => state.login.userData.error)
 
     function sendLoginRequest(email: string, password: string) {
         dispatch(loginTC(email, password))
