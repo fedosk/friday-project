@@ -8,6 +8,7 @@
 table {
     border-collapse: collapse;
     width: 100%;
+    table-layout: fixed;
 }
 
 th,
@@ -15,6 +16,7 @@ td {
     border: 1px solid #ffffff;
     text-align: left;
     padding: 8px;
+    word-wrap: break-word;
 }
 
 th {
@@ -35,6 +37,9 @@ form td:last-child {
     justify-content: space-evenly;
 }
 
-form * {
-    font-size: 28px;
+.addPacksFormWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }

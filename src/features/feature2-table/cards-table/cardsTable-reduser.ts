@@ -2,6 +2,8 @@ import {Dispatch} from "react";
 import {authApi} from "../../../main/dal/auth-api";
 
 const GET_CARDS = 'table/GET_CARDS'
+const SET_CARD_PACK = 'table/SET_CARD_PACK'
+const REMOVE_CARD_PACK = 'table/REMOVE_CARD_PACK'
 
 export type CardPackType = {
     "_id": string
@@ -59,6 +61,12 @@ export const cardsTableReducer = (state: InitialCardPacksStateType = initialStat
                 tokenDeathTime: action.cardPacksData.tokenDeathTime,
             }
         }
+        case SET_CARD_PACK: {
+            return {...state, cardPacks: [action.newCardPack, ...state.cardPacks],}
+        }
+        case REMOVE_CARD_PACK: {
+            return {...state, cardPacks: [...state.cardPacks.filter(p => p._id !== action.deletedPackId)]}
+        }
         default:
             return state
     }
@@ -68,11 +76,12 @@ export const takeCardPacksRequest = (cardPacksData: InitialCardPacksStateType) =
     type: GET_CARDS,
     cardPacksData
 } as const)
+export const setNewCardPack = (newCardPack: any) => ({type: SET_CARD_PACK, newCardPack} as const)
+export const deleteNewCardPack = (deletedPackId: string) => ({type: REMOVE_CARD_PACK, deletedPackId} as const)
 
 export const getCardPacksTC = () => (dispatch: Dispatch<ActionsType>) => {
     authApi.getCards()
         .then(res => {
-            debugger
             dispatch(takeCardPacksRequest(res.data))
         })
         .catch(error => {
@@ -81,4 +90,29 @@ export const getCardPacksTC = () => (dispatch: Dispatch<ActionsType>) => {
         )
 }
 
+export const setNewCardPackTC = (name: string) => (dispatch: Dispatch<ActionsType>) => {
+    authApi.createCardPack(name)
+        .then(res => {
+            dispatch(setNewCardPack(res.data.newCardsPack))
+        })
+        .catch(error => {
+                console.log(error)
+            }
+        )
+}
+
+export const deleteCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>) => {
+    authApi.deleteCardPack(id)
+        .then(res => {
+            debugger
+            dispatch(deleteNewCardPack(res.data.deletedCardsPack._id))
+        })
+        .catch(error => {
+                console.log(error)
+            }
+        )
+}
+
 export type ActionsType = ReturnType<typeof takeCardPacksRequest>
+    | ReturnType<typeof setNewCardPack>
+    | ReturnType<typeof deleteNewCardPack>

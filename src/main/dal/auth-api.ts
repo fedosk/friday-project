@@ -12,8 +12,14 @@ export const authApi = {
         return instance.post<any, AxiosResponse<ResponseLoginType>>('auth/login', {email, password, rememberMe: false})
     },
     getCards() {
-        return instance.get<any, AxiosResponse<InitialCardPacksStateType>>('/cards/pack?pageCount=1000&page=4&sortPacks=0updated')
-    }
+        return instance.get<any, AxiosResponse<InitialCardPacksStateType>>('/cards/pack?pageCount=1000&page=1&sortPacks=0updated')
+    },
+    createCardPack(name: string) {
+        return instance.post<any, AxiosResponse<any>>('/cards/pack', {cardsPack: {name}})
+    },
+    deleteCardPack(id: string) {
+        return instance.delete<any, AxiosResponse<any>>(`/cards/pack?id=${id}`)
+    },
 }
 
 export type ResponseLoginType = {
