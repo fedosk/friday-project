@@ -1,0 +1,20 @@
+.btns {
+    display: block;
+}
+
+.up {
+    background: greenyellow;
+    margin-bottom: 2px;
+}
+
+.down {
+    background: greenyellow;
+}
+
+.up:hover {
+    opacity: 0.5;
+}
+
+.down:hover {
+    opacity: 0.5;
+}
