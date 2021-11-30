@@ -1,7 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import styles from './CardsTable.module.css'
-import {CardPackType, deleteCardPackTC, getCardPacksTC, setNewCardPackTC} from "./cardsTable-reduser";
+import {
+    CardPackType,
+    deleteCardPackTC,
+    getCardPacksTC,
+    setNewCardPackTC,
+    updateCardPack,
+    updateCardPackTC
+} from "./cardsTable-reduser";
 import {AppRootStateType} from "../../../main/bll/store";
 import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInputText";
 import {EMPTY_STRING} from "../../feature1-auth/Login/login-reduser";
@@ -28,8 +35,11 @@ export function CardsTable() {
     }
 
     const onClickCardPackDelete = (id: string) => {
-        debugger
         dispatch(deleteCardPackTC(id))
+    }
+
+    const onClickCardPackUpdate = (id: string) => {
+        dispatch(updateCardPackTC(id))
     }
 
     return (
@@ -59,6 +69,7 @@ export function CardsTable() {
                     <th>Last Updated</th>
                     <th>Created by</th>
                     <th>Actions</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,7 +85,16 @@ export function CardsTable() {
                                 fontSize={'smallFont'}
                                 size={'small'}
                                 onClick={() => onClickCardPackDelete(elem._id)}>
-                                DELETE
+                                delete
+                            </SuperButton>
+                        </td>
+                        <td>
+                            <SuperButton
+                                fontColor={'black'}
+                                fontSize={'smallFont'}
+                                size={'small'}
+                                onClick={() => onClickCardPackUpdate(elem._id)}>
+                                update
                             </SuperButton>
                         </td>
                     </tr>

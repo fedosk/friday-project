@@ -60,7 +60,7 @@ export function PasswordRecovery() {
                             Send Instructions
                         </SuperButton>
                     </div>
-                    <span>Did you remember your password?</span>
+                    <span className={styles.title}>Did you remember your password?</span>
                     <div className={styles.tryLoginBtn}>
                         <Link to={path.login}>
                             <SuperButton

@@ -38,7 +38,7 @@
 .forgotPasswordBtn {
     margin: 48px 5px 0 0;
     display: flex;
-    align-self: flex-end;
+    justify-content: space-between;
 }
 
 .loginBtn {

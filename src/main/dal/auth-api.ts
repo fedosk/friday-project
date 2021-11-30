@@ -1,15 +1,21 @@
-import axios, {AxiosResponse} from 'axios'
+import axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
 import {InitialCardPacksStateType} from "../../features/feature2-table/cards-table/cardsTable-reduser";
 
 
 const instance = axios.create({
-    baseURL: 'https://neko-back.herokuapp.com/2.0', /*https://neko-back.herokuapp.com/2.0*/
+    baseURL: 'https://neko-back.herokuapp.com/2.0',
     withCredentials: true,
 })
 
 export const authApi = {
-    loginUser(email: string, password: string) {
-        return instance.post<any, AxiosResponse<ResponseLoginType>>('auth/login', {email, password, rememberMe: false})
+    loginUser(email: string, password: string, rememberMe: boolean) {
+        return instance.post<any, AxiosResponse<ResponseLoginType>>('auth/login', {email, password, rememberMe})
+    },
+    authUser() {
+        return instance.post<any, AxiosResponse<ResponseLoginType>>('auth/me')
+    },
+    logoutUser() {
+        return instance.delete<any, AxiosResponse<ResponseLoginType>>('auth/me')
     },
     getCards() {
         return instance.get<any, AxiosResponse<InitialCardPacksStateType>>('/cards/pack?pageCount=1000&page=1&sortPacks=0updated')
@@ -19,6 +25,9 @@ export const authApi = {
     },
     deleteCardPack(id: string) {
         return instance.delete<any, AxiosResponse<any>>(`/cards/pack?id=${id}`)
+    },
+    updateCardPack(id: string) {
+        return instance.put<any, AxiosResponse<any>>(`/cards/pack`, {cardsPack: {_id: id, name: "my updated pack", deckCover: ""}})
     },
 }
 

@@ -19,7 +19,7 @@ export const CheckEmail = () => {
                         </div>
                         <h2>Check Email</h2>
                     </div>
-                    <span> We’ve sent an Email with instructions to {email}</span>
+                    <span className={styles.title}> We’ve sent an Email with instructions to {email}</span>
                 </div>
             </div>
         </div>

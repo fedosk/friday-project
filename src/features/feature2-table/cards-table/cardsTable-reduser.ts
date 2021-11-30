@@ -4,6 +4,7 @@ import {authApi} from "../../../main/dal/auth-api";
 const GET_CARDS = 'table/GET_CARDS'
 const SET_CARD_PACK = 'table/SET_CARD_PACK'
 const REMOVE_CARD_PACK = 'table/REMOVE_CARD_PACK'
+const UPDATE_CARD_PACK = 'table/UPDATE_CARD_PACK'
 
 export type CardPackType = {
     "_id": string
@@ -67,6 +68,11 @@ export const cardsTableReducer = (state: InitialCardPacksStateType = initialStat
         case REMOVE_CARD_PACK: {
             return {...state, cardPacks: [...state.cardPacks.filter(p => p._id !== action.deletedPackId)]}
         }
+        case UPDATE_CARD_PACK: {
+            return {...state, cardPacks: [...state.cardPacks.map(p => p._id === action.updatedPack._id
+                    ? action.updatedPack
+                    : p)]}
+        }
         default:
             return state
     }
@@ -78,6 +84,7 @@ export const takeCardPacksRequest = (cardPacksData: InitialCardPacksStateType) =
 } as const)
 export const setNewCardPack = (newCardPack: any) => ({type: SET_CARD_PACK, newCardPack} as const)
 export const deleteNewCardPack = (deletedPackId: string) => ({type: REMOVE_CARD_PACK, deletedPackId} as const)
+export const updateCardPack = (updatedPack: any) => ({type: UPDATE_CARD_PACK, updatedPack} as const)
 
 export const getCardPacksTC = () => (dispatch: Dispatch<ActionsType>) => {
     authApi.getCards()
@@ -104,8 +111,18 @@ export const setNewCardPackTC = (name: string) => (dispatch: Dispatch<ActionsTyp
 export const deleteCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>) => {
     authApi.deleteCardPack(id)
         .then(res => {
-            debugger
             dispatch(deleteNewCardPack(res.data.deletedCardsPack._id))
+        })
+        .catch(error => {
+                console.log(error)
+            }
+        )
+}
+
+export const updateCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>) => {
+    authApi.updateCardPack(id)
+        .then(res => {
+            dispatch(updateCardPack(res.data.updatedCardsPack))
         })
         .catch(error => {
                 console.log(error)
@@ -116,3 +133,4 @@ export const deleteCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>
 export type ActionsType = ReturnType<typeof takeCardPacksRequest>
     | ReturnType<typeof setNewCardPack>
     | ReturnType<typeof deleteNewCardPack>
+    | ReturnType<typeof updateCardPack>

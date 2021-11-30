@@ -46,7 +46,7 @@ export function NewPassword() {
                             inputStyle
                         />
                     </div>
-                    <span>Create new password and we will send you further instructions to email</span>
+                    <span className={styles.title}>Create new password and we will send you further instructions to email</span>
                     <div className={styles.createNewPasswordBtn}>
                         <SuperButton
                             color={'blue'}
