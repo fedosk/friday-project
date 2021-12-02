@@ -1,5 +1,5 @@
 import {Dispatch} from "react";
-import {authApi} from "../../../main/dal/auth-api";
+import {authApi, ResponseLoginType} from "../../../main/dal/auth-api";
 
 const AUTH_USER = 'login/AUTH_USER'
 const SET_STATUS = 'login/SET_STATUS'
@@ -13,57 +13,49 @@ export const FAILED = 'failed'
 export const EMPTY_STRING = ''
 export const ZERO = 0
 
-export type InitialStateType = {
-    avatar: string
-    created: string
-    email: string
-    isAdmin: boolean
-    name: string
-    publicCardPacksCount: number
-    rememberMe: boolean
-    updated: string
-    verified: boolean
-    _id: string
-    error: string
+export type InitialStateType<T> = {
+    userData: T
     status: RequestStatusType
 }
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
-const initialState: InitialStateType = {
-    avatar: EMPTY_STRING,
-    created: EMPTY_STRING,
-    email: EMPTY_STRING,
-    isAdmin: false,
-    name: EMPTY_STRING,
-    publicCardPacksCount: ZERO,
-    rememberMe: false,
-    updated: EMPTY_STRING,
-    verified: false,
-    _id: EMPTY_STRING,
-    error: EMPTY_STRING,
+const initialState: InitialStateType<ResponseLoginType> = {
+    userData: {
+        avatar: EMPTY_STRING,
+        created: EMPTY_STRING,
+        email: EMPTY_STRING,
+        isAdmin: false,
+        name: EMPTY_STRING,
+        publicCardPacksCount: ZERO,
+        rememberMe: false,
+        updated: EMPTY_STRING,
+        verified: false,
+        _id: EMPTY_STRING,
+        error: EMPTY_STRING,
+    },
     status: IDLE,
 }
 
-export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const loginReducer = (state: InitialStateType<ResponseLoginType> = initialState, action: ActionsType): InitialStateType<ResponseLoginType> => {
     switch (action.type) {
         case AUTH_USER: {
-            return {...state}
+            return {...state, userData: {...action.userData}}
         }
         case SET_STATUS: {
             return {...state, status: action.status}
         }
         case ERROR_AUTH: {
-            return {...state, error: action.error}
+            return {...state, userData: {...state.userData, error: action.error}}
         }
         default:
             return state
     }
 }
 
-export const authUserRequest = (userData: InitialStateType) => ({type: AUTH_USER, userData} as const)
+export const authUserRequest = (userData: ResponseLoginType) => ({type: AUTH_USER, userData} as const)
 export const setStatusAuthUser = (status: RequestStatusType) => ({type: SET_STATUS, status} as const)
-export const errorAuthUser = (error: string) => ({type: ERROR_AUTH, error} as const)
+export const errorAuthUser = (error: string | undefined) => ({type: ERROR_AUTH, error} as const)
 
 export const loginTC = (email: string, password: string) => (dispatch: Dispatch<ActionsType>) => {
     authApi.loginUser(email, password)
