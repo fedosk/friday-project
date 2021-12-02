@@ -11,8 +11,8 @@ export const Search = (props:PropsType) => {
 
     const searchWord = () => {
         const copyArray = [...props.arr]
-        const result = copyArray.filter(el => el == word)
-        return result
+        //const result = copyArray.map(item => {item.name == word})
+       // return result
     }
 
     return(

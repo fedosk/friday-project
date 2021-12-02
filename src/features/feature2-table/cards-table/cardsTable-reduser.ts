@@ -8,6 +8,7 @@ const UPDATE_CARD_PACK = 'table/UPDATE_CARD_PACK'
 const CHANGE_FILTER = 'table/CHANGE_FILTER'
 const CHANGE_SORTING = 'table/CHANGE_SORTING'
 const CHANGE_SORT_CONFIG = 'table/CHANGE_SORT_CONFIG'
+const SET_SEARCH = 'table/SET_SEARCH'
 
 export type CardPackType = {
     _id: string
@@ -99,6 +100,9 @@ export const cardsTableReducer = (state: InitialCardPacksStateType = initialStat
         case CHANGE_SORT_CONFIG: {
             return {...state, sortConfig: action.sortConfig}
         }
+        case SET_SEARCH: {
+            return {...state, cardPacks: action.filteredCardPacksCopy}
+        }
         default:
             return state
     }
@@ -111,6 +115,7 @@ export const updateCardPack = (updatedPack: any) => ({type: UPDATE_CARD_PACK, up
 export const changeFiltering = (filteredBy: FilteringType) => ({type: CHANGE_FILTER, filteredBy} as const)
 export const changeSorting = (sortedBy: SortingType) => ({type: CHANGE_SORTING, sortedBy} as const)
 export const changeSortConfig = (sortConfig: SortConfigType) => ({type: CHANGE_SORT_CONFIG, sortConfig} as const)
+export const setSearch = (filteredCardPacksCopy:CardPackType[]) => ({type: SET_SEARCH, filteredCardPacksCopy} as const)
 
 export const getCardPacksTC = () => (dispatch: Dispatch<ActionsType>) => {
     authApi.getCards()
@@ -163,3 +168,4 @@ export type ActionsType = ReturnType<typeof takeCardPacksRequest>
     | ReturnType<typeof changeFiltering>
     | ReturnType<typeof changeSorting>
     | ReturnType<typeof changeSortConfig>
+    | ReturnType<typeof setSearch>

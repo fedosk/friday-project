@@ -6,7 +6,7 @@ import {
     deleteCardPackTC,
     FilteringType,
     getCardPacksTC,
-    setNewCardPackTC, SortConfigType, SortingType,
+    setNewCardPackTC, setSearch, SortConfigType, SortingType,
     updateCardPackTC
 } from "./cardsTable-reduser";
 import {AppRootStateType} from "../../../main/bll/store";
@@ -71,7 +71,7 @@ export function CardsTable() {
         dispatch(changeSorting(sortedBy))
     }
 
-    let cardPacksCopy = cardsPacks
+    let cardPacksCopy = [...cardsPacks]
 
     if (filteredBy === 'my') {
         cardPacksCopy = cardPacksCopy.filter(pack => filteredBy === 'my' && pack.user_id === userId)
@@ -92,6 +92,15 @@ export function CardsTable() {
 
     let sortBtnClass = sortConfig === 'ascending' ?  `${styles.btn} ${styles.ascending}` : `${styles.btn} ${styles.descending}`
 
+    //====SEARCH====
+
+    const searchHandler = () => {
+        const filteredCardPacksCopy = cardPacksCopy.filter(p => {
+            return p.name.toLowerCase().includes(name.toLowerCase())
+        })
+        dispatch(setSearch(filteredCardPacksCopy))
+    }
+
     return (
         <div className={styles.tableContainer}>
             <h2>Add a cards pack</h2>
@@ -102,6 +111,10 @@ export function CardsTable() {
                     onChangeText={setName}
                     inputStyle
                 />
+                <SuperButton
+                    onClick={searchHandler}>
+                    Search
+                </SuperButton>
                 <SuperButton
                     classBtn={'confirmBtn'}
                     onClick={addItemHandler}>
