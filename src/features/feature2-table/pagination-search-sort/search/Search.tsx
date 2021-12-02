@@ -12,7 +12,6 @@ export const Search = (props:PropsType) => {
     const searchWord = () => {
         const copyArray = [...props.arr]
         const result = copyArray.filter(el => el == word)
-        //const arr2 = copyArray.match(/\D+/g);
         return result
     }
 

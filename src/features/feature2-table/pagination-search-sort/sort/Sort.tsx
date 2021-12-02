@@ -20,10 +20,10 @@ export const Sort = (props: PropsType) => {
     return (
         <div className={s.btns}>
             <div>
-                <button className={s.up} autoFocus onClick={handlerSortUp}> /\</button>
+                <button className={s.up} autoFocus onClick={handlerSortUp}> ˄ </button>
             </div>
             <div>
-                <button className={s.down} autoFocus onClick={handlerSortDown}> \/</button>
+                <button className={s.down} autoFocus onClick={handlerSortDown}> ˅ </button>
             </div>
         </div>
     )
