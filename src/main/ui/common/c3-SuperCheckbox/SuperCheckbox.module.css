@@ -1,7 +1,16 @@
-.checkbox {
+.checkboxWrapper {
+    width: 140px;
+    display: flex;
+    align-items: center;
+}
 
+.checkbox {
+    margin-left: 7px;
+    margin-top: 2px;
+    cursor: pointer;
 }
 
 .spanClassName {
-
+    cursor: pointer;
 }
+

@@ -15,11 +15,11 @@ export const CheckEmail = () => {
                     <h1 className={styles.logo}>It-incubator</h1>
                     <div className={styles.checkEmailWrapper}>
                         <div className={styles.checkEmailImg}>
-                            <img src={checkEmail}/>
+                            <img src={checkEmail} alt={'checkEmail'}/>
                         </div>
                         <h2>Check Email</h2>
                     </div>
-                    <span> We’ve sent an Email with instructions to {email}</span>
+                    <span className={styles.title}> We’ve sent an Email with instructions to {email}</span>
                 </div>
             </div>
         </div>

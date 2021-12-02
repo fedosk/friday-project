@@ -51,22 +51,15 @@ export function PasswordRecovery() {
                     <span>Enter your email address and we will send you further instructions </span>
                     <div className={styles.sendInstructionsBtn}>
                         <SuperButton
-                            color={'blue'}
-                            fontColor={'white'}
-                            size={'big'}
-                            btn
-                            onClick={onClick}
-                        >
+                            classBtn={'confirmBtn'}
+                            onClick={onClick}>
                             Send Instructions
                         </SuperButton>
                     </div>
-                    <span>Did you remember your password?</span>
+                    <span className={styles.title}>Did you remember your password?</span>
                     <div className={styles.tryLoginBtn}>
                         <Link to={path.login}>
-                            <SuperButton
-                                fontColor={'#21268F'}
-                                fontSize={'big'}
-                                size={'small'}>
+                            <SuperButton>
                                 Try logging in
                             </SuperButton>
                         </Link>

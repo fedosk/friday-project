@@ -3,22 +3,17 @@ import {authApi, ResponseLoginType} from "../../../main/dal/auth-api";
 
 const AUTH_USER = 'login/AUTH_USER'
 const SET_STATUS = 'login/SET_STATUS'
+const DELETE_USER = 'login/DELETE_USER'
 const ERROR_AUTH = 'login/ERROR_AUTH'
-
-export const IDLE = 'idle'
-export const LOADING = 'loading'
-export const SUCCEEDED = 'succeeded'
-export const FAILED = 'failed'
+const CHANGE_REMEMBER_ME_STUSUS = 'login/CHANGE_REMEMBER_ME_STUSUS'
 
 export const EMPTY_STRING = ''
 export const ZERO = 0
 
 export type InitialStateType<T> = {
     userData: T
-    status: RequestStatusType
+    authStatus: boolean
 }
-
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 const initialState: InitialStateType<ResponseLoginType> = {
     userData: {
@@ -34,19 +29,36 @@ const initialState: InitialStateType<ResponseLoginType> = {
         _id: EMPTY_STRING,
         error: EMPTY_STRING,
     },
-    status: IDLE,
+    authStatus: false
 }
 
 export const loginReducer = (state: InitialStateType<ResponseLoginType> = initialState, action: ActionsType): InitialStateType<ResponseLoginType> => {
     switch (action.type) {
         case AUTH_USER: {
-            return {...state, userData: {...action.userData}}
+            return {...state, userData: {...action.userData}, authStatus: true}
         }
-        case SET_STATUS: {
-            return {...state, status: action.status}
+        case DELETE_USER: {
+            return {
+                ...state,
+                userData: {
+                    ...state.userData,
+                    avatar: EMPTY_STRING,
+                    created: EMPTY_STRING,
+                    email: EMPTY_STRING,
+                    isAdmin: false,
+                    name: EMPTY_STRING,
+                    publicCardPacksCount: ZERO,
+                    rememberMe: false,
+                    updated: EMPTY_STRING,
+                    verified: false,
+                    _id: EMPTY_STRING,
+                    error: EMPTY_STRING,
+                },
+                authStatus: false
+            }
         }
-        case ERROR_AUTH: {
-            return {...state, userData: {...state.userData, error: action.error}}
+        case CHANGE_REMEMBER_ME_STUSUS: {
+            return {...state, userData: {...state.userData, rememberMe: action.rememberMeStatus}}
         }
         default:
             return state
@@ -54,24 +66,44 @@ export const loginReducer = (state: InitialStateType<ResponseLoginType> = initia
 }
 
 export const authUserRequest = (userData: ResponseLoginType) => ({type: AUTH_USER, userData} as const)
-export const setStatusAuthUser = (status: RequestStatusType) => ({type: SET_STATUS, status} as const)
+export const logoutUserRequest = () => ({type: DELETE_USER} as const)
 export const errorAuthUser = (error: string | undefined) => ({type: ERROR_AUTH, error} as const)
+export const setRememberMeStatus = (rememberMeStatus: boolean) => ({
+    type: CHANGE_REMEMBER_ME_STUSUS,
+    rememberMeStatus
+} as const)
 
-export const loginTC = (email: string, password: string) => (dispatch: Dispatch<ActionsType>) => {
-    authApi.loginUser(email, password)
+export const loginTC = (email: string, password: string, rememberMeStatus: boolean) => (dispatch: Dispatch<ActionsType>) => {
+    authApi.loginUser(email, password, rememberMeStatus)
         .then(res => {
-            if (!res.data.error) {
-                dispatch(authUserRequest(res.data))
-                dispatch(setStatusAuthUser('succeeded'))
-            }
+            dispatch(authUserRequest(res.data))
         })
         .catch(error => {
-            dispatch(setStatusAuthUser('failed'))
             dispatch(errorAuthUser(error.error))
+        })
+}
+
+export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
+    authApi.logoutUser()
+        .then(res => {
+            dispatch(logoutUserRequest())
+        })
+        .catch(error => {
             console.log(error)
         })
 }
 
+export const authUserTC = () => (dispatch: Dispatch<ActionsType>) => {
+    authApi.authUser()
+        .then(res => {
+            dispatch(authUserRequest({...res.data}))
+        })
+        .catch(error => {
+            dispatch(errorAuthUser(error.error))
+        })
+}
+
 export type ActionsType = ReturnType<typeof authUserRequest>
-    | ReturnType<typeof setStatusAuthUser>
     | ReturnType<typeof errorAuthUser>
+    | ReturnType<typeof setRememberMeStatus>
+    | ReturnType<typeof logoutUserRequest>

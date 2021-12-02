@@ -1,31 +1,66 @@
-.default {
-    font-weight: bold;
-    background-color: #F9F9FE;
-    position: relative;
-    width: 100px;
-    padding: 5px;
-}
-
 .btn {
-    height: 36px;
+    border: none;
+    outline: none;
     appearance: none;
-    border: 0;
+    background-color: transparent;
     font-weight: bold;
-    margin: 0 5px 0 5px;
     transition: 0.2s;
-    border-radius: 30px;
-    padding: 5px;
 }
 
-.blueButton {
-    box-shadow: 0 4px 18px rgba(33, 38, 143, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    background-color: rgb(33, 38, 143);
+.deleteBtn {
+    padding: 10px 20px;
+    background-color: #F1453D;
     color: #F9F9FE;
+    border-radius: 5px;
 }
 
-.blueButton:hover {
+.bigDeleteBtn {
+    padding: 10px 40px;
+    background-color: #F1453D;
+    color: #F9F9FE;
+    border-radius: 30px;
+}
+
+.updateBtn {
+    padding: 10px 20px;
+    background-color: #D7D8EF;
+    color: #282c34;
+    border-radius: 5px;
+}
+
+.confirmBtn{
+    padding: 10px 40px;
+    background-color: #21268F;
+    color: #F9F9FE;
+    border-radius: 30px;
+    box-shadow: 0 4px 18px rgba(33, 38, 143, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.confirmBtn:hover {
     background-color: rgba(33, 38, 143, 0.7);
     transition: 0.2s;
 }
+
+.cancelBtn{
+    padding: 10px 40px;
+    background-color: #D7D8EF;
+    color: #21268F;
+    border-radius: 30px;
+}
+
+.filterBtn {
+    padding: 10px 40px;
+    background-color: #D7D8EF;
+    color: #21268F;
+    border-radius: 30px;
+}
+
+.filterBtnActive {
+    padding: 10px 40px;
+    background-color: #D7D8EF;
+    color: #21268F;
+    border-radius: 5px 0 0 5px;
+}
+
 
 
