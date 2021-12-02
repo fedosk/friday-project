@@ -8,6 +8,7 @@ import {Navigate} from "react-router-dom";
 import {path} from "../../../main/ui/routes/Routes";
 import {authUserTC, logoutTC} from "../Login/login-reduser";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
+import {changeFiltering} from "../../feature2-table/cards-table/cardsTable-reduser";
 
 
 export function Profile() {
@@ -24,6 +25,14 @@ export function Profile() {
         dispatch(logoutTC())
     }
 
+    const onMyBtnClick = () => {
+        dispatch(changeFiltering('my'))
+    }
+
+    const onAllBtnClick = () => {
+        dispatch(changeFiltering('all'))
+    }
+
     if (!authStatus) {
         return <Navigate to={path.login}/>
     } else {
@@ -35,12 +44,19 @@ export function Profile() {
                         <div className={styles.leftBar}>
                             Show packs cards
                             <SuperButton
-                                color={'blue'}
-                                fontColor={'white'}
-                                size={'small'}
-                                onClick={() => sendLogoutRequest()}
-                                btn>
+                                classBtn={'cancelBtn'}
+                                onClick={() => sendLogoutRequest()}>
                                 Logout
+                            </SuperButton>
+                            <SuperButton
+                                classBtn={'filterBtnActive'}
+                                onClick={onMyBtnClick}>
+                                My
+                            </SuperButton>
+                            <SuperButton
+                                classBtn={'filterBtn'}
+                                onClick={onAllBtnClick}>
+                                All
                             </SuperButton>
                         </div>
                         <div className={styles.tableWrapper}>

@@ -64,31 +64,22 @@ export function Login() {
                                 checked={rememberMeStatus}
                                 onChangeChecked={setRememberMeStatus}/>
                             <Link to={path.passwordRecovery}>
-                                <SuperButton
-                                    fontSize={'medium'}
-                                    size={'medium'}>
+                                <SuperButton>
                                     Forgot password
                                 </SuperButton>
                             </Link>
                         </div>
                         <div className={styles.loginBtn}>
                             <SuperButton
-                                color={'blue'}
-                                fontColor={'white'}
-                                size={'big'}
-                                onClick={() => sendLoginRequest(email, password, rememberMeStatus)}
-                                btn>
+                                classBtn={'confirmBtn'}
+                                onClick={() => sendLoginRequest(email, password, rememberMeStatus)}>
                                 Login
                             </SuperButton>
                         </div>
                         <span>Don’t have an account?</span>
                         <div className={styles.signUpBtn}>
                             <Link to={path.register}>
-                                <SuperButton
-                                    fontColor={'#21268F'}
-                                    fontSize={'big'}
-                                    size={'small'}
-                                    btn>
+                                <SuperButton>
                                     Sign Up
                                 </SuperButton>
                             </Link>

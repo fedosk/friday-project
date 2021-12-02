@@ -49,11 +49,8 @@ export function NewPassword() {
                     <span className={styles.title}>Create new password and we will send you further instructions to email</span>
                     <div className={styles.createNewPasswordBtn}>
                         <SuperButton
-                            color={'blue'}
-                            fontColor={'white'}
-                            size={'big'}
-                            onClick={onClick}
-                            btn>
+                            classBtn={'confirmBtn'}
+                            onClick={onClick}>
                             Create New Password
                         </SuperButton>
                     </div>
