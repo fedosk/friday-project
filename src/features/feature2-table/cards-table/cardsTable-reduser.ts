@@ -101,7 +101,7 @@ export const cardsTableReducer = (state: InitialCardPacksStateType = initialStat
             return {...state, sortConfig: action.sortConfig}
         }
         case SET_SEARCH: {
-            return {...state, cardPacks: action.filteredCardPacksCopy}
+            return {...state, cardPacks: action.filteredCardPacks}
         }
         default:
             return state
@@ -115,7 +115,7 @@ export const updateCardPack = (updatedPack: any) => ({type: UPDATE_CARD_PACK, up
 export const changeFiltering = (filteredBy: FilteringType) => ({type: CHANGE_FILTER, filteredBy} as const)
 export const changeSorting = (sortedBy: SortingType) => ({type: CHANGE_SORTING, sortedBy} as const)
 export const changeSortConfig = (sortConfig: SortConfigType) => ({type: CHANGE_SORT_CONFIG, sortConfig} as const)
-export const setSearch = (filteredCardPacksCopy:CardPackType[]) => ({type: SET_SEARCH, filteredCardPacksCopy} as const)
+export const setSearch = (filteredCardPacks:CardPackType[]) => ({type: SET_SEARCH, filteredCardPacks} as const)
 
 export const getCardPacksTC = () => (dispatch: Dispatch<ActionsType>) => {
     authApi.getCards()

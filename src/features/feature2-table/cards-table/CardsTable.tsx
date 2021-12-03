@@ -95,10 +95,10 @@ export function CardsTable() {
     //====SEARCH====
 
     const searchHandler = () => {
-        const filteredCardPacksCopy = cardPacksCopy.filter(p => {
+        const filteredCardPacks = cardPacksCopy.filter(p => {
             return p.name.toLowerCase().includes(name.toLowerCase())
         })
-        dispatch(setSearch(filteredCardPacksCopy))
+        dispatch(setSearch(filteredCardPacks))
     }
 
     return (
@@ -111,10 +111,13 @@ export function CardsTable() {
                     onChangeText={setName}
                     inputStyle
                 />
-                <SuperButton
-                    onClick={searchHandler}>
-                    Search
-                </SuperButton>
+                <div>
+                    <SuperButton
+                        classBtn={'confirmBtn'}
+                        onClick={searchHandler}>
+                        Search
+                    </SuperButton>
+                </div>
                 <SuperButton
                     classBtn={'confirmBtn'}
                     onClick={addItemHandler}>
