@@ -7,6 +7,7 @@ import {PasswordRecovery} from "../../../features/feature1-auth/Password-recover
 import {CheckEmail} from "../../../features/feature1-auth/Password-recovery/check-email/CheckEmail";
 import {Profile} from "../../../features/feature1-auth/Profile/Profile";
 import {Register} from "../../../features/feature1-auth/Register/Register";
+import {ListCard} from "../../../features/feature2-table/cards-table/list-card/ListCard";
 
 
 export const path = {
@@ -17,6 +18,7 @@ export const path = {
     profile: '/profile',
     register: '/register',
     error: '/error404',
+    cardsList: '/cards-list/:id/:name',
 }
 
 export function Rout() {
@@ -31,8 +33,10 @@ export function Rout() {
                 <Route path={path.profile} element={<Profile/>}/>
                 <Route path={path.register} element={<Register/>}/>
                 <Route path={path.error} element={<Error404/>}/>
+                <Route path={path.cardsList} element={<ListCard/>}/>
                 <Route path={'*'} element={<Error404/>}/>
             </Routes>
         </div>
     );
 }
+

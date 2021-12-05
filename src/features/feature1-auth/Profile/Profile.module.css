@@ -16,11 +16,21 @@
 
 .leftBar {
     width: 15%;
-    min-width: 200px;
+    min-width: 240px;
     max-height: 90vh;
     border-radius: 8px 0 0 8px;
     background-color: #ECECF9;
     padding: 15px;
+}
+
+.leftBarTitle {
+    font-weight: bold;
+    margin: 10px 20px 20px 20px;
+}
+
+.filterBtnsWrapper {
+    margin-bottom: 20px;
+    float: bottom;
 }
 
 .tableWrapper {

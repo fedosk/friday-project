@@ -48,7 +48,7 @@ export function PasswordRecovery() {
                             inputStyle
                         />
                     </div>
-                    <span>Enter your email address and we will send you further instructions </span>
+                    <span className={styles.title}>Enter your email address and we will send you further instructions </span>
                     <div className={styles.sendInstructionsBtn}>
                         <SuperButton
                             classBtn={'confirmBtn'}
@@ -59,7 +59,8 @@ export function PasswordRecovery() {
                     <span className={styles.title}>Did you remember your password?</span>
                     <div className={styles.tryLoginBtn}>
                         <Link to={path.login}>
-                            <SuperButton>
+                            <SuperButton
+                                classBtn={'btn'}>
                                 Try logging in
                             </SuperButton>
                         </Link>

@@ -2,54 +2,47 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import styles from './CardsTable.module.css'
 import {
-    CardPackType, changeSortConfig, changeSorting,
+    CardPackType,
+    changeSortConfig,
+    changeSorting,
     deleteCardPackTC,
     FilteringType,
     getCardPacksTC,
-    setNewCardPackTC, SortConfigType, SortingType,
+    setNewCardPackTC,
+    SortConfigType,
+    SortingType,
     updateCardPackTC
 } from "./cardsTable-reduser";
 import {AppRootStateType} from "../../../main/bll/store";
 import SuperInputText from "../../../main/ui/common/c1-SuperInputText/SuperInputText";
 import {EMPTY_STRING} from "../../feature1-auth/Login/login-reduser";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
+import {dateChanger} from "../../../hooks/dateChanger/dateChanger";
+import {useNavigate} from "react-router-dom";
+import {Modal} from "../../../main/ui/common/Modal/Modal";
 
-export const dateChanger = (date: string) => {
-    let changedDate = new Date(Date.parse(date))
-    const checkingDate = (d: number) => {
-        return d >= 10 ? d : `0${d}`
-    }
-    let day = checkingDate(changedDate.getDay())
-    let month = checkingDate(changedDate.getMonth())
-    let year = checkingDate(changedDate.getFullYear())
-    let hours = checkingDate(changedDate.getHours())
-    let minutes = checkingDate(changedDate.getMinutes())
-    return `${day}.${month}.${year} in ${hours}:${minutes}`
-
-}
 
 export function CardsTable() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const cardsPacks = useSelector<AppRootStateType, CardPackType[]>(state => state.cardsPacks.cardPacks)
     const userId = useSelector<AppRootStateType, string>(state => state.login.userData._id)
     const filteredBy = useSelector<AppRootStateType, FilteringType>(state => state.cardsPacks.filteredBy)
     const sortConfig = useSelector<AppRootStateType, SortConfigType>(state => state.cardsPacks.sortConfig)
     const sortedBy = useSelector<AppRootStateType, SortingType>(state => state.cardsPacks.sortedBy)
 
+    const [activeModal, setActiveModal] = useState<boolean>(false)
     const [name, setName] = useState<string>(EMPTY_STRING)
     const [error, setError] = useState<string | null>(null)
+
 
     useEffect(() => {
         dispatch(getCardPacksTC())
     }, [])
 
     const addItemHandler = () => {
-        if (name.trim() !== '') {
-            dispatch(setNewCardPackTC(name))
-            setName('');
-        } else {
-            setError('Name is required');
-        }
+        dispatch(setNewCardPackTC(name))
+        setActiveModal(false)
     }
 
     const onClickCardPackDelete = (id: string) => {
@@ -58,6 +51,10 @@ export function CardsTable() {
 
     const onClickCardPackUpdate = (id: string) => {
         dispatch(updateCardPackTC(id))
+    }
+
+    const onLearnCardClick = (_id: string, cardPackName: string) => {
+        return navigate(`/cards-list/${_id}/${cardPackName}`, {replace: true})
     }
 
     //====TABLE SORT AND FILTER====
@@ -90,21 +87,37 @@ export function CardsTable() {
     }
     //====TABLE SORT AND FILTER====
 
-    let sortBtnClass = sortConfig === 'ascending' ?  `${styles.btn} ${styles.ascending}` : `${styles.btn} ${styles.descending}`
+
+    let sortBtnClass = sortConfig === 'ascending' ? `${styles.btn} ${styles.ascending}` : `${styles.btn} ${styles.descending}`
 
     return (
         <div className={styles.tableContainer}>
-            <h2>Add a cards pack</h2>
-            <div className={styles.addPacksFormWrapper}>
+            <Modal title={'Add new pack'} activeModal={activeModal} setActiveModal={setActiveModal}>
                 <SuperInputText
                     formName={error ? error : 'Name of pack'}
                     type={'email'}
                     onChangeText={setName}
                     inputStyle
                 />
+                <div className={styles.modalBtnsWrapper}>
+                    <SuperButton
+                        classBtn={'cancelBtn'}
+                        onClick={() => setActiveModal(false)}>
+                        Cancel
+                    </SuperButton>
+                    <SuperButton
+                        classBtn={'confirmBtn'}
+                        onClick={addItemHandler}>
+                        Save
+                    </SuperButton>
+                </div>
+            </Modal>
+            <h2>Add a cards pack</h2>
+            <div className={styles.addPacksFormWrapper}>
                 <SuperButton
                     classBtn={'confirmBtn'}
-                    onClick={addItemHandler}>
+                    // onClick={addItemHandler}>
+                    onClick={() => setActiveModal(!activeModal)}>
                     Add new pack
                 </SuperButton>
             </div>
@@ -146,17 +159,22 @@ export function CardsTable() {
                         <td>{dateChanger(elem.updated)}</td>
                         <td>{elem.user_name}</td>
                         <td>
+                            <SuperButton
+                                classBtn={'updateBtn'}
+                                onClick={() => onLearnCardClick(elem._id, elem.name)}>
+                                Learn
+                            </SuperButton>
                             {elem.user_id === userId
                                 ? <>
                                     <SuperButton
-                                        classBtn={'deleteBtn'}
-                                        onClick={() => onClickCardPackDelete(elem._id)}>
-                                        delete
-                                    </SuperButton>
-                                    <SuperButton
                                         classBtn={'updateBtn'}
                                         onClick={() => onClickCardPackUpdate(elem._id)}>
-                                        update
+                                        Update
+                                    </SuperButton>
+                                    <SuperButton
+                                        classBtn={'deleteBtn'}
+                                        onClick={() => onClickCardPackDelete(elem._id)}>
+                                        Delete
                                     </SuperButton>
                                 </>
                                 : <div/>}

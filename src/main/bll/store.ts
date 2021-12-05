@@ -5,6 +5,7 @@ import {registerReducer} from "../../features/feature1-auth/Register/register-re
 import {passwordRecoveryReducer} from "../../features/feature1-auth/Password-recovery/password-recovery-reduser";
 import {profileReducer} from "../../features/feature1-auth/Profile/profile-reduser";
 import {cardsTableReducer} from "../../features/feature2-table/cards-table/cardsTable-reduser";
+import {listCardReducer} from "../../features/feature2-table/cards-table/list-card/listCard-reduser";
 
 const rootReducer = combineReducers({
     login:loginReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     passwordRecovery: passwordRecoveryReducer,
     profile: profileReducer,
     cardsPacks: cardsTableReducer,
+    cardsList: listCardReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

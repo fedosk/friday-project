@@ -5,15 +5,17 @@ import {CardsTable} from "../../feature2-table/cards-table/CardsTable";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../main/bll/store";
 import {Navigate} from "react-router-dom";
-import {path} from "../../../main/ui/routes/Routes";
+
 import {authUserTC, logoutTC} from "../Login/login-reduser";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
-import {changeFiltering} from "../../feature2-table/cards-table/cardsTable-reduser";
+import {changeFiltering, FilteringType} from "../../feature2-table/cards-table/cardsTable-reduser";
+import {path} from "../../../main/ui/routes/Routes";
 
 
 export function Profile() {
     const dispatch = useDispatch()
     const authStatus = useSelector<AppRootStateType, boolean>(state => state.login.authStatus)
+    const filteredBy = useSelector<AppRootStateType, FilteringType>(state => state.cardsPacks.filteredBy)
 
     useEffect(() => {
         if (!authStatus) {
@@ -42,21 +44,23 @@ export function Profile() {
                 <div className={styles.tableContainer}>
                     <div className={styles.mainWrapper}>
                         <div className={styles.leftBar}>
-                            Show packs cards
+                            <h3 className={styles.leftBarTitle}>Show packs cards</h3>
+                            <div className={styles.filterBtnsWrapper}>
+                                <SuperButton
+                                    classBtn={filteredBy === 'my' ? 'filterMyBtnActive' : 'filteMyBtn'}
+                                    onClick={onMyBtnClick}>
+                                    My
+                                </SuperButton>
+                                <SuperButton
+                                    classBtn={filteredBy === 'all' ? 'filterAllBtnActive' : 'filterAllBtn'}
+                                    onClick={onAllBtnClick}>
+                                    All
+                                </SuperButton>
+                            </div>
                             <SuperButton
                                 classBtn={'cancelBtn'}
                                 onClick={() => sendLogoutRequest()}>
                                 Logout
-                            </SuperButton>
-                            <SuperButton
-                                classBtn={'filterBtnActive'}
-                                onClick={onMyBtnClick}>
-                                My
-                            </SuperButton>
-                            <SuperButton
-                                classBtn={'filterBtn'}
-                                onClick={onAllBtnClick}>
-                                All
                             </SuperButton>
                         </div>
                         <div className={styles.tableWrapper}>

@@ -1,0 +1,142 @@
+.listCardContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    min-height: calc(100vh - 60px)
+}
+
+.listCardWrapper {
+    margin: auto;
+    width: 90vw;
+    height: 90vh;
+    background-color: #FEFEFF;
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+.tableWrapper {
+
+}
+
+.titleWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.packName {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.back {
+    font-size: 36px;
+}
+
+.back:hover {
+    color: #9A91C8;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    font-size: 13px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+tr:nth-child(even) {
+    background: #F8F7FD
+}
+
+tr:nth-child(odd) {
+    background: #ffffff
+}
+
+
+th {
+    text-align: left;
+    padding: 10px;
+    word-wrap: break-word;
+}
+
+td {
+    text-align: left;
+    padding: 10px 20px;
+    word-wrap: break-word;
+}
+
+th {
+    background-color: #ECECF9;
+}
+
+form td:last-child {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.addPacksFormWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actions {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/*.question {*/
+/*    min-width: 250px;*/
+/*}*/
+
+/*.answer {
+    width: 80px;
+}*/
+
+.updated {
+    width: 160px;
+}
+
+.grade {
+    width: 140px;
+}
+
+.actions {
+    width: 220px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px 0 20px 26px;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 8px;
+    position: relative;
+}
+
+.ascending:after {
+    position: absolute;
+    content: "";
+    background-image: url('../../../../main/ui/assets/img/icons/Polygon.png');
+    transform: rotate(180deg);
+    top: 7px;
+    left: -15px;
+    width: 10px;
+    height: 6px;
+}
+
+.descending:after {
+    position: absolute;
+    content: "";
+    background-image: url('../../../../main/ui/assets/img/icons/Polygon.png');
+    top: 7px;
+    left: -15px;
+    width: 10px;
+    height: 6px;
+}

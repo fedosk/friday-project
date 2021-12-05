@@ -89,7 +89,8 @@ export function Register() {
                     <div className={styles.buttons}>
                         <div className={styles.cancelBtn}>
                             <Link to={path.login}>
-                                <SuperButton>
+                                <SuperButton
+                                    classBtn={'cancelBtn'}>
                                     Cancel
                                 </SuperButton>
                             </Link>

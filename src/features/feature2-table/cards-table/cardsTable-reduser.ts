@@ -1,7 +1,7 @@
 import {Dispatch} from "react";
-import {authApi} from "../../../main/dal/auth-api";
+import {cardPacksApi} from "../../../main/dal/cardPacks-api";
 
-const GET_CARDS = 'table/GET_CARDS'
+const GET_CARD_PACKS = 'table/GET_CARDS'
 const SET_CARD_PACK = 'table/SET_CARD_PACK'
 const REMOVE_CARD_PACK = 'table/REMOVE_CARD_PACK'
 const UPDATE_CARD_PACK = 'table/UPDATE_CARD_PACK'
@@ -43,7 +43,6 @@ export type InitialCardPacksStateType = {
     tokenDeathTime: number
 
     filteredBy: FilteringType
-
     sortedBy: SortingType
     sortConfig: SortConfigType
 }
@@ -57,6 +56,7 @@ const initialState: InitialCardPacksStateType = {
     maxCardsCount: 0,
     token: "",
     tokenDeathTime: 0,
+
     filteredBy: "all",
     sortedBy: null,
     sortConfig: 'ascending'
@@ -64,7 +64,7 @@ const initialState: InitialCardPacksStateType = {
 
 export const cardsTableReducer = (state: InitialCardPacksStateType = initialState, action: ActionsType): InitialCardPacksStateType => {
     switch (action.type) {
-        case GET_CARDS: {
+        case GET_CARD_PACKS: {
             return {
                 ...state,
                 cardPacks: [...action.cardPacksData.cardPacks],
@@ -104,7 +104,7 @@ export const cardsTableReducer = (state: InitialCardPacksStateType = initialStat
     }
 }
 
-export const takeCardPacksRequest = (cardPacksData: InitialCardPacksStateType) => ({type: GET_CARDS, cardPacksData} as const)
+export const takeCardPacksRequest = (cardPacksData: InitialCardPacksStateType) => ({type: GET_CARD_PACKS, cardPacksData} as const)
 export const setNewCardPack = (newCardPack: any) => ({type: SET_CARD_PACK, newCardPack} as const)
 export const deleteNewCardPack = (deletedPackId: string) => ({type: REMOVE_CARD_PACK, deletedPackId} as const)
 export const updateCardPack = (updatedPack: any) => ({type: UPDATE_CARD_PACK, updatedPack} as const)
@@ -113,7 +113,7 @@ export const changeSorting = (sortedBy: SortingType) => ({type: CHANGE_SORTING, 
 export const changeSortConfig = (sortConfig: SortConfigType) => ({type: CHANGE_SORT_CONFIG, sortConfig} as const)
 
 export const getCardPacksTC = () => (dispatch: Dispatch<ActionsType>) => {
-    authApi.getCards()
+    cardPacksApi.getCardPacks()
         .then(res => {
             dispatch(takeCardPacksRequest(res.data))
         })
@@ -124,7 +124,7 @@ export const getCardPacksTC = () => (dispatch: Dispatch<ActionsType>) => {
 }
 
 export const setNewCardPackTC = (name: string) => (dispatch: Dispatch<ActionsType>) => {
-    authApi.createCardPack(name)
+    cardPacksApi.createCardPack(name)
         .then(res => {
             dispatch(setNewCardPack(res.data.newCardsPack))
         })
@@ -135,7 +135,7 @@ export const setNewCardPackTC = (name: string) => (dispatch: Dispatch<ActionsTyp
 }
 
 export const deleteCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>) => {
-    authApi.deleteCardPack(id)
+    cardPacksApi.deleteCardPack(id)
         .then(res => {
             dispatch(deleteNewCardPack(res.data.deletedCardsPack._id))
         })
@@ -146,7 +146,7 @@ export const deleteCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>
 }
 
 export const updateCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>) => {
-    authApi.updateCardPack(id)
+    cardPacksApi.updateCardPack(id)
         .then(res => {
             dispatch(updateCardPack(res.data.updatedCardsPack))
         })

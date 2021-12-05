@@ -3,16 +3,21 @@
     flex-direction: column;
 }
 
+.modalBtnsWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
-    font-size: 16px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 th,
 td {
-    border: 1px solid #ffffff;
     text-align: left;
     padding: 15px;
     word-wrap: break-word;
@@ -22,8 +27,12 @@ th {
     background-color: #ECECF9;
 }
 
-td {
-    background-color: #F8F7FD;
+tr:nth-child(even) {
+    background: #F8F7FD
+}
+
+tr:nth-child(odd) {
+    background: #ffffff
 }
 
 form {
@@ -43,29 +52,33 @@ form td:last-child {
     align-items: center;
 }
 
-.name {
-    min-width: 250px;
-}
+/*.name {*/
+/*    min-width: 250px;*/
+/*}*/
 
 .cardsCount {
-    max-width: 80px;
+    width: 80px;
 }
 
 .updated {
-    min-width: 160px;
+    width: 175px;
 }
 
-.user_name {
-    min-width: 250px;
-}
+/*.user_name {*/
+/*    min-width: 250px;*/
+/*}*/
 
 .actions {
-    min-width: 200px;
+    width: 220px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px 0 20px 26px;
 }
 
 .btn {
     border: none;
     outline: none;
+    background-color: transparent;
     font-size: 16px;
     font-weight: bold;
     margin-left: 8px;
@@ -92,3 +105,4 @@ form td:last-child {
     width: 10px;
     height: 6px;
 }
+

@@ -23,7 +23,9 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
     }
 
     let btnClassName
-
+    if (classBtn === 'btn') {
+        btnClassName = s.btn
+    }
     if (classBtn === 'deleteBtn') {
         btnClassName = `${s.btn} ${s.deleteBtn}`
     }
@@ -42,11 +44,17 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
     if (classBtn === 'bigDeleteBtn') {
         btnClassName = `${s.btn} ${s.bigDeleteBtn}`
     }
-    if (classBtn === 'filterBtn') {
-        btnClassName = `${s.btn} ${s.filterBtn}`
+    if (classBtn === 'filteMyBtn') {
+        btnClassName = `${s.btn} ${s.filteMyBtn}`
     }
-    if (classBtn === 'filterBtnActive') {
-        btnClassName = `${s.btn} ${s.filterBtnActive}`
+    if (classBtn === 'filterAllBtn') {
+        btnClassName = `${s.btn} ${s.filterAllBtn}`
+    }
+    if (classBtn === 'filterMyBtnActive') {
+        btnClassName = `${s.btn} ${s.filterMyBtnActive}`
+    }
+    if (classBtn === 'filterAllBtnActive') {
+        btnClassName = `${s.btn} ${s.filterAllBtnActive}`
     }
 
     return (

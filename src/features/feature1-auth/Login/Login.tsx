@@ -64,7 +64,8 @@ export function Login() {
                                 checked={rememberMeStatus}
                                 onChangeChecked={setRememberMeStatus}/>
                             <Link to={path.passwordRecovery}>
-                                <SuperButton>
+                                <SuperButton
+                                    classBtn={'btn'}>
                                     Forgot password
                                 </SuperButton>
                             </Link>
@@ -79,7 +80,8 @@ export function Login() {
                         <span>Don’t have an account?</span>
                         <div className={styles.signUpBtn}>
                             <Link to={path.register}>
-                                <SuperButton>
+                                <SuperButton
+                                    classBtn={'btn'}>
                                     Sign Up
                                 </SuperButton>
                             </Link>
