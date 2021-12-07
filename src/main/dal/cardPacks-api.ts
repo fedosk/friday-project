@@ -13,11 +13,11 @@ export const cardPacksApi = {
     deleteCardPack(id: string) {
         return instance.delete<any, AxiosResponse<any>>(`/cards/pack?id=${id}`)
     },
-    updateCardPack(id: string) {
+    updateCardPack(id: string, name: string) {
         return instance.put<any, AxiosResponse<any>>(`/cards/pack`, {
             cardsPack: {
                 _id: id,
-                name: "my updated pack",
+                name,
                 deckCover: ""
             }
         })

@@ -4,24 +4,27 @@ import SuperButton from "../c2-SuperButton/SuperButton";
 
 
 export type ModalType = {
-    activeModal: boolean
-    setActiveModal: (activeModal: boolean) => void
+    index: number
+    active: Array<boolean>
+    setActive: (activeModal: Array<boolean>) => void
     title: string
 }
 
-export const Modal: FC<ModalType> = ({activeModal, setActiveModal, title, children}) => {
+
+export const Modal: FC<ModalType> = ({active, setActive, index, title, children}) => {
+
     return (
         <div
-            className={activeModal ? `${styles.modalWrapper} ${styles.active}` : styles.modalWrapper}
-            onClick={() => setActiveModal(false)}>
+            className={active[index] ? `${styles.modalWrapper} ${styles.active}` : styles.modalWrapper}
+            onClick={() => setActive([false])}>
             <div
-                className={activeModal ? `${styles.modalContent} ${styles.active}` : styles.modalContent}
+                className={active[index] ? `${styles.modalContent} ${styles.active}` : styles.modalContent}
                 onClick={event => event.stopPropagation()}>
                 <div className={styles.headerModalWrapper}>
                     <h3 className={styles.modalTitle}>{title}</h3>
                     <SuperButton
                         classBtn={'btn'}
-                        onClick={() => setActiveModal(false)}>
+                        onClick={() => setActive([false])}>
                         <span className={styles.closeBtn}>×</span>
                     </SuperButton>
                 </div>

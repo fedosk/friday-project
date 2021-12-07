@@ -41,7 +41,6 @@ export type InitialCardPacksStateType = {
     maxCardsCount: number
     token: string
     tokenDeathTime: number
-
     filteredBy: FilteringType
     sortedBy: SortingType
     sortConfig: SortConfigType
@@ -56,7 +55,6 @@ const initialState: InitialCardPacksStateType = {
     maxCardsCount: 0,
     token: "",
     tokenDeathTime: 0,
-
     filteredBy: "all",
     sortedBy: null,
     sortConfig: 'ascending'
@@ -104,7 +102,10 @@ export const cardsTableReducer = (state: InitialCardPacksStateType = initialStat
     }
 }
 
-export const takeCardPacksRequest = (cardPacksData: InitialCardPacksStateType) => ({type: GET_CARD_PACKS, cardPacksData} as const)
+export const takeCardPacksRequest = (cardPacksData: InitialCardPacksStateType) => ({
+    type: GET_CARD_PACKS,
+    cardPacksData
+} as const)
 export const setNewCardPack = (newCardPack: any) => ({type: SET_CARD_PACK, newCardPack} as const)
 export const deleteNewCardPack = (deletedPackId: string) => ({type: REMOVE_CARD_PACK, deletedPackId} as const)
 export const updateCardPack = (updatedPack: any) => ({type: UPDATE_CARD_PACK, updatedPack} as const)
@@ -145,8 +146,8 @@ export const deleteCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>
         )
 }
 
-export const updateCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>) => {
-    cardPacksApi.updateCardPack(id)
+export const updateCardPackTC = (id: string, name: string) => (dispatch: Dispatch<ActionsType>) => {
+    cardPacksApi.updateCardPack(id, name)
         .then(res => {
             dispatch(updateCardPack(res.data.updatedCardsPack))
         })
