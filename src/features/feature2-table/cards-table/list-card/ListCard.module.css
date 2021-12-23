@@ -140,3 +140,21 @@ form td:last-child {
     width: 10px;
     height: 6px;
 }
+
+.modalBtnsWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.modalInputsWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.modalWrapper {
+    display: flex;
+    flex-direction: column;
+}

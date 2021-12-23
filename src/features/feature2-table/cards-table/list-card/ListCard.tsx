@@ -19,6 +19,7 @@ import {SortConfigType} from "../cardsTable-reduser";
 import {Link, useParams} from "react-router-dom";
 import {Header} from "../../../../main/ui/header/Header";
 import {path} from "../../../../main/ui/routes/Routes";
+import {Modal} from "../../../../main/ui/common/Modal/Modal";
 
 
 export function ListCard() {
@@ -30,6 +31,8 @@ export function ListCard() {
     const cardsSortConfig = useSelector<AppRootStateType, SortConfigType>(state => state.cardsList.cardsSortConfig)
     const cardsSortedBy = useSelector<AppRootStateType, CardsSortingType>(state => state.cardsList.cardsSortedBy)
 
+
+    const [activeAddCardModal, setActiveAddCardModal] = useState<Array<boolean>>([false])
     const [question, setQuestion] = useState<string>(EMPTY_STRING)
     const [answer, setAnswer] = useState<string>(EMPTY_STRING)
     const grade = 0
@@ -43,6 +46,7 @@ export function ListCard() {
 
     const addCardHandler = (cardsPack_id: string, question: string, grade: number, answer: string) => {
         dispatch(setNewCardTC(cardsPack_id, question, grade, answer))
+        setActiveAddCardModal([false])
         setQuestion('');
         setAnswer('');
     }
@@ -97,22 +101,44 @@ export function ListCard() {
                         </Link>
                         <h2 className={styles.packName}>{cardPackName}</h2>
                     </div>
+
+                    <Modal index={0} title={'Add new card'}
+                           active={activeAddCardModal}
+                           setActive={setActiveAddCardModal}>
+                        <div className={styles.modalWrapper}>
+                            <div className={styles.modalInputsWrapper}>
+                                <SuperInputText
+                                    formName={'Question'}
+                                    type={'text'}
+                                    onChangeText={setQuestion}
+                                    inputStyle
+                                />
+                                <SuperInputText
+                                    formName={'Answer'}
+                                    type={'text'}
+                                    onChangeText={setAnswer}
+                                    inputStyle
+                                />
+                            </div>
+                            <div className={styles.modalBtnsWrapper}>
+                                <SuperButton
+                                    classBtn={'cancelBtn'}
+                                    onClick={() => setActiveAddCardModal([false])}>
+                                    Cancel
+                                </SuperButton>
+                                <SuperButton
+                                    classBtn={'confirmBtn'}
+                                    onClick={() => addCardHandler(cardPackId, question, grade, answer)}>
+                                    Add new pack
+                                </SuperButton>
+                            </div>
+                        </div>
+                    </Modal>
+                    <h2>Add a card</h2>
                     <div className={styles.addPacksFormWrapper}>
-                        <SuperInputText
-                            formName={'Question'}
-                            type={'text'}
-                            onChangeText={setQuestion}
-                            inputStyle
-                        />
-                        <SuperInputText
-                            formName={'Answer'}
-                            type={'text'}
-                            onChangeText={setAnswer}
-                            inputStyle
-                        />
                         <SuperButton
                             classBtn={'confirmBtn'}
-                            onClick={() => addCardHandler(cardPackId, question, grade, answer)}>
+                            onClick={() => setActiveAddCardModal([true])}>
                             Add new pack
                         </SuperButton>
                     </div>

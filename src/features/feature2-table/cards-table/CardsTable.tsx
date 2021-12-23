@@ -22,6 +22,14 @@ import {useNavigate} from "react-router-dom";
 import {Modal} from "../../../main/ui/common/Modal/Modal";
 
 
+export const handleChangesModal = (index: number, activeModal: Array<boolean>, setActive: (activeModal: Array<boolean>) => void) => {
+    let items = [...activeModal]
+    let item = items[index]
+    item = true
+    items[index] = item;
+    return setActive(items)
+}
+
 export function CardsTable() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -93,14 +101,6 @@ export function CardsTable() {
     }
     //====TABLE SORT AND FILTER====
 
-    const handleChangesModal = (index: number, setActive: (activeModal: Array<boolean>) => void) => {
-        let items = [...modalDeleteCardPackBtnState]
-        let item = items[index]
-        item = true
-        items[index] = item;
-        setActive(items)
-    }
-
     let sortBtnClass = sortConfig === 'ascending' ? `${styles.btn} ${styles.ascending}` : `${styles.btn} ${styles.descending}`
 
     return (
@@ -125,7 +125,7 @@ export function CardsTable() {
                     </SuperButton>
                 </div>
             </Modal>
-            <h2>Add a cards pack</h2>
+            <h2>Add a card pack</h2>
             <div className={styles.addPacksFormWrapper}>
                 <SuperButton
                     classBtn={'confirmBtn'}
@@ -180,7 +180,7 @@ export function CardsTable() {
                                 ? <>
                                     <SuperButton
                                         classBtn={'updateBtn'}
-                                        onClick={() => handleChangesModal(index, setActiveUpdatePackModal)}>
+                                        onClick={() => handleChangesModal(index, modalDeleteCardPackBtnState, setActiveUpdatePackModal)}>
                                         Update
                                     </SuperButton>
                                     <Modal
@@ -211,7 +211,7 @@ export function CardsTable() {
 
                                     <SuperButton
                                         classBtn={'deleteBtn'}
-                                        onClick={() => handleChangesModal(index, setActiveDeletePackModal)}>
+                                        onClick={() => handleChangesModal(index, modalDeleteCardPackBtnState, setActiveDeletePackModal)}>
                                         Delete
                                     </SuperButton>
                                     <Modal index={index} title={'Delete Pack'} active={activeDeletePackModal}
