@@ -6,7 +6,7 @@ import {AppRootStateType} from "../../../../main/bll/store";
 
 
 export const CheckEmail = () => {
-    const email = useSelector((state: AppRootStateType) => state.passwordRecovery.email)
+    const email = useSelector((state: AppRootStateType) => state.login.userData.email)
 
     return (
         <div className='container'>
@@ -19,7 +19,7 @@ export const CheckEmail = () => {
                         </div>
                         <h2>Check Email</h2>
                     </div>
-                    <span className={styles.title}> We’ve sent an Email with instructions to {email}</span>
+                    <span className={styles.title}> We’ve sent an Email with instructions to your email</span>
                 </div>
             </div>
         </div>

@@ -38,6 +38,8 @@ export function CardsTable() {
     const filteredBy = useSelector<AppRootStateType, FilteringType>(state => state.cardsPacks.filteredBy)
     const sortConfig = useSelector<AppRootStateType, SortConfigType>(state => state.cardsPacks.sortConfig)
     const sortedBy = useSelector<AppRootStateType, SortingType>(state => state.cardsPacks.sortedBy)
+    const minCardsCountFilter = useSelector<AppRootStateType, number>(state => state.cardsPacks.minCardsCountFilter)
+    const maxCardsCountFilter = useSelector<AppRootStateType, number>(state => state.cardsPacks.maxCardsCountFilter)
 
     const [activeModal, setActiveModal] = useState<Array<boolean>>([false])
     const modalDeleteCardPackBtnState = cardsPacks.map(() => false)
@@ -53,7 +55,6 @@ export function CardsTable() {
     const addItemHandler = () => {
         dispatch(setNewCardPackTC(name))
         setActiveModal([false])
-
     }
 
     const onClickCardPackDelete = (id: string) => {
@@ -83,6 +84,8 @@ export function CardsTable() {
     }
 
     let cardPacksCopy = cardsPacks
+
+    cardPacksCopy = cardPacksCopy.filter(pack => pack.cardsCount >= minCardsCountFilter && pack.cardsCount <= maxCardsCountFilter)
 
     if (filteredBy === 'my') {
         cardPacksCopy = cardPacksCopy.filter(pack => filteredBy === 'my' && pack.user_id === userId)

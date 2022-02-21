@@ -8,14 +8,23 @@ import {Navigate} from "react-router-dom";
 
 import {authUserTC, logoutTC} from "../Login/login-reduser";
 import SuperButton from "../../../main/ui/common/c2-SuperButton/SuperButton";
-import {changeFiltering, FilteringType} from "../../feature2-table/cards-table/cardsTable-reduser";
+import {
+    changeCardsCountFilter,
+    changeFiltering,
+    FilteringType
+} from "../../feature2-table/cards-table/cardsTable-reduser";
 import {path} from "../../../main/ui/routes/Routes";
+import MultiRangeSlider from "../../../main/ui/common/MultiRangeSlider/MultiRangeSlider";
 
 
 export function Profile() {
     const dispatch = useDispatch()
     const authStatus = useSelector<AppRootStateType, boolean>(state => state.login.authStatus)
     const filteredBy = useSelector<AppRootStateType, FilteringType>(state => state.cardsPacks.filteredBy)
+    const minCardsCountFilter = useSelector<AppRootStateType, number>(state => state.cardsPacks.minCardsCountFilter)
+    const maxCardsCountFilter = useSelector<AppRootStateType, number>(state => state.cardsPacks.maxCardsCountFilter)
+    const minCardsCount = useSelector<AppRootStateType, number>(state => state.cardsPacks.minCardsCount)
+    const maxCardsCount = useSelector<AppRootStateType, number>(state => state.cardsPacks.maxCardsCount)
 
     useEffect(() => {
         if (!authStatus) {
@@ -33,6 +42,10 @@ export function Profile() {
 
     const onAllBtnClick = () => {
         dispatch(changeFiltering('all'))
+    }
+
+    const onChangeDubleRange = (value: number[]) => {
+        dispatch(changeCardsCountFilter(value[0],value[1]))
     }
 
     if (!authStatus) {
@@ -57,6 +70,12 @@ export function Profile() {
                                     All
                                 </SuperButton>
                             </div>
+                            <MultiRangeSlider
+                                min={minCardsCount}
+                                max={maxCardsCount}
+                                value={[minCardsCountFilter, maxCardsCountFilter]}
+                                onChangeRange={onChangeDubleRange}
+                            />
                             <SuperButton
                                 classBtn={'cancelBtn'}
                                 onClick={() => sendLogoutRequest()}>

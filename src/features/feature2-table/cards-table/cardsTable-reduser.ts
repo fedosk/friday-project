@@ -8,6 +8,7 @@ const UPDATE_CARD_PACK = 'table/UPDATE_CARD_PACK'
 const CHANGE_FILTER = 'table/CHANGE_FILTER'
 const CHANGE_SORTING = 'table/CHANGE_SORTING'
 const CHANGE_SORT_CONFIG = 'table/CHANGE_SORT_CONFIG'
+const CHANGE_CARDS_COUNT_FILTER = 'table/CHANGE_CARDS_COUNT_FILTER'
 
 export type CardPackType = {
     _id: string
@@ -39,6 +40,8 @@ export type InitialCardPacksStateType = {
     cardPacksTotalCount: number
     minCardsCount: number
     maxCardsCount: number
+    minCardsCountFilter: number
+    maxCardsCountFilter: number
     token: string
     tokenDeathTime: number
     filteredBy: FilteringType
@@ -53,6 +56,8 @@ const initialState: InitialCardPacksStateType = {
     cardPacksTotalCount: 0,
     minCardsCount: 0,
     maxCardsCount: 0,
+    minCardsCountFilter: 0,
+    maxCardsCountFilter: 0,
     token: "",
     tokenDeathTime: 0,
     filteredBy: "all",
@@ -71,6 +76,8 @@ export const cardsTableReducer = (state: InitialCardPacksStateType = initialStat
                 cardPacksTotalCount: action.cardPacksData.cardPacksTotalCount,
                 minCardsCount: action.cardPacksData.minCardsCount,
                 maxCardsCount: action.cardPacksData.maxCardsCount,
+                minCardsCountFilter: action.cardPacksData.minCardsCount,
+                maxCardsCountFilter: action.cardPacksData.maxCardsCount,
                 token: action.cardPacksData.token,
                 tokenDeathTime: action.cardPacksData.tokenDeathTime,
             }
@@ -97,21 +104,22 @@ export const cardsTableReducer = (state: InitialCardPacksStateType = initialStat
         case CHANGE_SORT_CONFIG: {
             return {...state, sortConfig: action.sortConfig}
         }
+        case CHANGE_CARDS_COUNT_FILTER: {
+            return {...state, minCardsCountFilter: action.min, maxCardsCountFilter: action.max}
+        }
         default:
             return state
     }
 }
 
-export const takeCardPacksRequest = (cardPacksData: InitialCardPacksStateType) => ({
-    type: GET_CARD_PACKS,
-    cardPacksData
-} as const)
+export const takeCardPacksRequest = (cardPacksData: InitialCardPacksStateType) => ({type: GET_CARD_PACKS, cardPacksData} as const)
 export const setNewCardPack = (newCardPack: any) => ({type: SET_CARD_PACK, newCardPack} as const)
 export const deleteNewCardPack = (deletedPackId: string) => ({type: REMOVE_CARD_PACK, deletedPackId} as const)
 export const updateCardPack = (updatedPack: any) => ({type: UPDATE_CARD_PACK, updatedPack} as const)
 export const changeFiltering = (filteredBy: FilteringType) => ({type: CHANGE_FILTER, filteredBy} as const)
 export const changeSorting = (sortedBy: SortingType) => ({type: CHANGE_SORTING, sortedBy} as const)
 export const changeSortConfig = (sortConfig: SortConfigType) => ({type: CHANGE_SORT_CONFIG, sortConfig} as const)
+export const changeCardsCountFilter = (min: number, max: number) => ({type: CHANGE_CARDS_COUNT_FILTER, min, max} as const)
 
 export const getCardPacksTC = () => (dispatch: Dispatch<ActionsType>) => {
     cardPacksApi.getCardPacks()
@@ -164,3 +172,4 @@ export type ActionsType = ReturnType<typeof takeCardPacksRequest>
     | ReturnType<typeof changeFiltering>
     | ReturnType<typeof changeSorting>
     | ReturnType<typeof changeSortConfig>
+    | ReturnType<typeof changeCardsCountFilter>
